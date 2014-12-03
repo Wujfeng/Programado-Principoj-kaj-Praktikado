@@ -20,11 +20,11 @@ int main()
     cout << "Bonvole enigu la monunuon kaj poste simbolon (Y por japana eno, E por eŭro, kaj P por brita pundo):  " << '\n';
     cin >> amount >> symbol ;
 
-    if (symbol = 'E')
+    if (symbol == 'E')
         cout << "Vi havas $" << amount * dollars_in_a_euro << '\n';
-    else if (symbol = 'P')
+    else if (symbol == 'P')
         cout << "Vi havas $" << amount * dollars_in_a_pound << '\n';
-    else if (symbol = 'Y')
+    else if (symbol == 'Y')
         cout << "Vi havas $" << amount * dollars_in_a_yen << '\n';
     else
         cout << "Bonvole enigu leĝan valuton.";
