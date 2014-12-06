@@ -1,0 +1,18 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+// Tiu ĉi programo publikigas ĉiujn literojn de angla alfabeto kaj la entjerajn valorojn de ĉiu litero uzante ordonon "for." 
+
+int main()
+
+{
+
+    for (int entjero = 0, a = 97; entjero < 26; ++entjero) {
+        cout << char ('a' + entjero) << '\t' << a + entjero << '\n';
+    }
+    return 0;
+}
