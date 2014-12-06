@@ -5,7 +5,7 @@
 #include<algorithm>
 using namespace std;
 
-// Tiu ĉi programo publikigas ĉiujn literojn de angla alfabeto kaj la entjeraj valoroj de ĉiu litero.
+// Tiu ĉi programo publikigas ĉiujn literojn de angla alfabeto kaj la entjerajn valorojn de ĉiu litero.
 
 int main()
 
