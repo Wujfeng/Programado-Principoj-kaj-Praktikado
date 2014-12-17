@@ -1,0 +1,26 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+
+{
+    cout << "Enter two numbers: ";
+    int x, y;
+    char n;
+    cin >> x;
+    cin >> y;
+    while (n != '|')
+    {
+        cout << x << " " << y << "\n";
+
+        cout << "Enter | to quit: ";
+        cin >> n;
+    }
+
+    return 0;
+}
+
