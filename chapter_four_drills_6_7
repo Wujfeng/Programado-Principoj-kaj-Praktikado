@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+
+{
+    double number, x = 0.0;
+    vector<double> num;
+    string unit;
+    cout << "Please enter a list of numbers each followed by a unit (m, cm, ft, or in). Press SPACE after each unit and press ENTER at the end: ";
+    while (cin >> number >> unit) {
+            if (unit == "cm") {
+                number = (number/100);
+                }
+            else if (unit == "ft") {
+                number = (number/3.28);
+                }
+            else if (unit == "in") {
+                number = (number/39.37);
+                }
+            else if (unit == "m") {
+                number = (number/1);
+                }
+            else if (unit != "cm" || "ft" || "in" || "m") {
+                cout << "Please enter a valid unit of length.";
+                }
+            num.push_back(number);
+            sort(num.begin(),num.end());
+            if (number = num[0]) {
+                cout << "The smallest length entered so far is: " << num[0] << "m \n";
+            }
+            x = num.size();
+            if (number = num[x-1]) {
+                cout << "The largest length entered so far is: " << num[x-1] << "m \n";
+            }
+            cout << "You have entered " << num.size() << " numbers. \n";
+        }
+   return 0;
+
+}
