@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+
+{
+    vector <string> numbers;
+
+    numbers.push_back("one");
+    numbers.push_back("two");
+    numbers.push_back("three");
+    numbers.push_back("four");
+    numbers.push_back("five");
+    numbers.push_back("six");
+    numbers.push_back("seven");
+    numbers.push_back("eight");
+    numbers.push_back("nine");
+    numbers.push_back("ten");
+
+    int i;
+    string spelled;
+    cout << "Enter a number: ";
+    if (cin >> i && i <= 10) {
+        cout << i << " is spelled as " << numbers[i-1] << ".\n";
+        }
+    else if (cin >> spelled) {
+        spelled == numbers[i];
+        cout << spelled << " is written as " << numbers[i] << ".\n";
+        }
+    return 0;
+}
