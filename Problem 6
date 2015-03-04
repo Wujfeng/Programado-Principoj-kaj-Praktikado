@@ -21,15 +21,13 @@ int main()
     numbers.push_back("nine");
     numbers.push_back("ten");
 
-    int i;
-    string spelled;
-    cout << "Enter a number: ";
-    if (cin >> i && i <= 10) {
+    int i = 0;
+    cout << "Enter a number between 1 and 10: ";
+        if (cin >> i && i <= 10) {
         cout << i << " is spelled as " << numbers[i-1] << ".\n";
         }
-    else if (cin >> spelled) {
-        spelled == numbers[i];
-        cout << spelled << " is written as " << numbers[i] << ".\n";
-        }
+        else
+        cout << "The number you have entered is invalid. Please enter a number between 1 and 10. \n";
+
     return 0;
 }
