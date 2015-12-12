@@ -1,0 +1,19 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+
+{
+    vector<int> esp; // declaration
+    int number = 0; // declaration
+
+    while (cin >> number) { // condition
+        esp.push_back(number); // statement
+        }
+    cout << esp[0] << esp[1]; // statement
+    return 0;
+}

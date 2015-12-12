@@ -1,0 +1,29 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+
+{
+    vector<double> userInput(2);
+
+    cout << "Enter two integer values seperated by a whitespace ('|' to quit): ";
+
+    while (cin >> userInput[0] >> userInput[1]) {
+        if (userInput[0] < userInput[1])
+            cout << "The smaller value is " << userInput[0] << " and the larger value is " << userInput[1] << '\n';
+        else if (userInput[1] < userInput[0])
+            cout << "The smaller value is " << userInput[1] << " and the larger value is " << userInput[0] << '\n';
+    double x, y;
+    x = (userInput[0] - userInput[1]);
+    y = (userInput[1] - userInput[0]);
+         if (std::abs((x - y) < 0.1));
+            cout << "The numbers are almost equal.";
+        }
+
+
+        return 0;
+}

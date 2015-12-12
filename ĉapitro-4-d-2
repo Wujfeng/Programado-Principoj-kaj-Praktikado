@@ -1,0 +1,18 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+// Tiu ĉi programo publikigas ĉiujn literojn de angla alfabeto (majusklaj kaj malmajusklaj) kaj la entjeraj valoroj de ĉiu litero.
+
+int main()
+
+{
+
+    for (int entjero = 0, A = 48; entjero < 52; ++entjero) {
+        cout << char ('A' + entjero) << '\t' << A + entjero << '\n';
+    }
+    return 0;
+}

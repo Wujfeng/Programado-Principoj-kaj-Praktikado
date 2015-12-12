@@ -1,0 +1,77 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+// This program asks users how many pennies, nickels, dimes, quarters, half dollars, and one dollar coins they have.
+// Then it sums the input into a dollar value output.
+
+// Tiu ĉi programo demandas al uzanto kiom mono ili havas.
+// Poste ili aldonas ĉiujn nombrojn kaj eldonigas la rezultaton en dolaroj.
+
+int main()
+
+{
+
+cout << "How many pennies do you have? \n";
+float pen;
+cin >> pen;
+
+if (pen == 1.0) {
+    cout << "You've one penny. \n";
+    }
+    else cout << "You have " << pen << " penny. \n";
+
+cout << "How many nickels do you have? \n";
+float nic;
+cin >> nic;
+
+if (nic == 1.0) {
+    cout << "You've one nickel. \n";
+    }
+    else cout << "You have " << nic << " nickels. \n";
+
+cout << "How many dimes do you have? \n";
+float dim;
+cin >> dim;
+
+if (dim == 1.0) {
+    cout << "You've one dime. \n";
+    }
+    else cout << "You have " << dim << " dimes. \n";
+
+cout << "How many quarters do you have? \n";
+float quar;
+cin >> quar;
+
+if (quar == 1.0) {
+    cout << "You've one quarter. \n";
+    }
+    else cout << "You have " << quar << " quarters. \n";
+
+cout << "How many half dollars do you have? \n" ;
+float hal;
+cin >> hal;
+
+if (hal == 1.0) {
+    cout << "You've one half dollar. \n";
+    }
+    else cout << "You have " << hal << " half dollars. \n";
+
+cout << "How many dollars do you have? \n";
+float dol;
+cin >> dol;
+
+if (dol == 1.0) {
+    cout << "You've one dollar. \n";
+    }
+    else cout << "You have " << dol << " dollars. \n";
+
+float a;
+a = (pen * 0.01) + (nic * 0.05) + (dim * 0.10) + (quar * 0.25) + (hal * 0.50) + (dol * 1);
+cout << "You have $" << a << "\n";
+
+return 0;
+}

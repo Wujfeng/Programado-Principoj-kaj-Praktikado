@@ -1,0 +1,51 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+// Tiu ĉi programo ŝanĝas britajn pundojn, eŭrojn, japanajn enojn, ĉinajn juanojn, kaj svedajn kronojn en usonajn dolarojn.
+
+int main()
+
+{
+    double dollars_in_a_euro = 1.2311;
+    double dollars_in_a_pound = 1.5689;
+    double dollars_in_a_yen = 0.0084;
+    double dollars_in_a_yuan = 0.1625;
+    double dollars_in_a_kroner = 1.2126;
+
+
+    char symbol = ' ';
+    int amount = 0;
+
+    cout << "Bonvole enigu la monunuon kaj poste simbolon:  " << '\n';
+    cout <<  "Y por japana eno." << '\n' << "E por eŭro" << '\n' << "P por brita pundo" << '\n';
+    cout << "R por ĉina juano" << '\n' << "K por sveda krono" << '\n';
+    cin >> amount >> symbol ;
+
+    switch (symbol) {
+
+    case 'E':
+        cout << "Vi havas $" << amount * dollars_in_a_euro << '\n';
+        break;
+    case 'P':
+        cout << "Vi havas $" << amount * dollars_in_a_pound << '\n';
+        break;
+    case 'Y':
+        cout << "Vi havas $" << amount * dollars_in_a_yen << '\n';
+        break;
+    case 'R':
+        cout << "Vi havas $" << amount * dollars_in_a_yuan << '\n';
+        break;
+    case 'K':
+        cout << "Vi havas $" << amount * dollars_in_a_kroner << '\n';
+        break;
+    default:
+        cout << "Bonvole enigu leĝan valuton.";
+        break;
+        }
+    return 0;
+
+}
