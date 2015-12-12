@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+
+{
+    double number1, number2, x, y, z = 0;
+    cout << "Please enter two numbers. Press ENTER after each of them or press SPACE between the two numbers: ";
+    while (cin >> number1 >> number2) {
+
+        if (number1 < number2) {
+            cout << "The smaller value is: " << number1 << "\n";
+            cout << "The larger value is: " << number2 << "\n";
+            y = (number2 - number1);
+            z = (1.0/10000000);
+                if (y < z) {
+                    cout << "The numbers " << number1 << " and " << number2 << " are almost equal. \n";
+                    }
+            }
+
+        if (number2 < number1) {
+            cout << "The smaller value is: " << number2 << "\n";
+            cout << "The larger value is: " << number1 << "\n";
+            x = (number1 - number2);
+            z = (1.0/10000000);
+            if (x < z) {
+            cout << "The numbers " << number1 << " and " << number2 << " are almost equal. \n";
+            }
+        }
+
+        if (number1 == number2) {
+            cout << "The numbers " << number1 << " and " << number2 << " are equal. \n";
+        }
+
+        }
+   return 0;
+
+}

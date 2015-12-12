@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+
+{
+    double number, x = 0;
+    vector<double> num;
+    cout << "Please enter a list of numbers (each separated by SPACE) and press ENTER at the end: ";
+    while (cin >> number) {
+            num.push_back(number);
+            sort(num.begin(),num.end());
+            if (number = num[0]) {
+                cout << "The smallest number entered so far is: " << num[0] << "\n";
+            }
+            x = num.size();
+            if (number = num[x-1]) {
+                cout << "The largest number entered so far is: " << num[x-1] << "\n";
+            }
+            cout << "You have entered " << num.size() << " numbers. \n";
+        }
+   return 0;
+
+}

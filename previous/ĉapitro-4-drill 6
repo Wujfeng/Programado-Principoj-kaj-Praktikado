@@ -1,0 +1,29 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+
+{
+    vector<double> userInput(0);
+    double number = 0.0;
+    string cm, m, in, ft;
+
+    cout << "Enter a number: ";
+
+    while (cin >> number) {
+        userInput.push_back(number);
+        cout << number << '\n';
+        sort(userInput.begin(), userInput.end());
+
+        if (number == userInput[(userInput.size()/userInput.size()) - 1])
+            cout << "The smallest number entered so far is: " << number << '\n';
+        if (number == userInput [userInput.size() - 1])
+            cout << "The largest number entered so far is: " << number << '\n';
+        }
+
+        return 0;
+}
