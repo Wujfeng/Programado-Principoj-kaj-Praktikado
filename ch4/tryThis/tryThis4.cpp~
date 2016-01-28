@@ -1,0 +1,20 @@
+/*
+    This program prints ASCII characters and their corressponding
+    integer values against them.
+    
+    Here, a for loop is used. In tryThis3.cpp, a while loop was 
+    used. 
+*/
+
+#include <iostream> 
+#include <cmath> 
+
+int main()
+{
+    for (i = 0; i < 58; ++i) {
+        std::cout << char('A'+i) << '\t' << 'A'+i << '\n';
+        ++i; 
+        }
+        
+    return 0;
+}
