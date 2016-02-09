@@ -4,20 +4,85 @@
     No more than 7 questions can be asked to the user. 
 */
 
+// This program is copied from the Internet. Need to revise it before I can say 
+// that I have truly mastered the problem. 
+
 #include <iostream> 
+#include <vector> 
 
 using namespace std; 
-
 int main()
 {
-    const int lowest = 1; 
-    const int largest = 100; 
-    int guess = 0; 
-    char c;
-    
-    
-    
-    cout << guess << '\n'; 
-    
-    return 0;
+    // Prompts a user to think of a number and respond to the computer's
+    // guesses. 
+    cout << "Think of a number between 1 and 100.\n";
+    cout << "For every guess, enter if your number is\n";
+    cout << "(l)arger or (s)maller than the one shown.\n";
+    cout << "Enter 'c' (for 'correct') if the number shown is yours.\n";
+
+    // Create a vector differences of length 5. 
+    // Declares the values of each vector space. 
+    int guess = 50;
+    vector<int> differences(6);
+    differences[0] = 25;
+    differences[1] = 13;
+    differences[2] = 6;
+    differences[3] = 3;
+    differences[4] = 2;
+    differences[5] = 1;
+    int counter = 0;
+    char answer = ' ';
+
+    // The loop will execute at least once because answer is not equal to 'c'. 
+    while (answer != 'c') {
+        cout << "My guess: " << guess << endl;
+        ++counter;
+        cout << "Correct, larger or smaller (c, l, s)? ";
+        cin >> answer;
+        switch (answer) {
+        case 'c':
+            // do nothing, simply fall out of the loop
+            // Here it is assumed that the user thought of 50, which will happen only 
+            // one in 100 times. Cases 'l' and 's' are more likely. 
+            break;
+        case 'l':
+            // increase by next difference or one
+            if (counter<=differences.size())
+                // Guess is 75 after first iteration.
+                // Guess is 38 after first iteration. 
+                guess += differences[counter-1];
+            else
+                ++guess; // What is this line of coding doing here? 
+            break;
+        case 's':
+            // decrease by next difference
+            if (counter<=differences.size())
+                // Guess is 25 after the first iteration. 
+                guess -= differences[counter-1];
+            else
+                --guess; // What is this line of coding doing here? 
+            break;
+        default:
+            // invalid answer, reduce counter because guess does not count
+            cout << "This is not a valid answer, use 'c', 'l' or 's'\n";
+            --counter;
+            break;
+        }
+        if (guess>100 || guess<1) {
+            cout << "Your number must be between 1 and 100!\n";
+            return 0;
+        }
+        if (counter==7 && answer!='c')
+        {
+            cout << "Super fishy, dude. I should have your number by now.\n";
+            return 0;
+        }
+    }
+
+    string s_try;
+    if (counter==1)
+        s_try = " try ";
+    else
+        s_try = " tries ";
+    cout << "It took me " << counter << s_try << "to find your number, " << guess << ".\n";
 }
