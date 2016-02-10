@@ -11,9 +11,9 @@ using namespace std;
 int main()
 {
     int square = 1; // There can't be a zero square. 
-    double rice_grain = 1; // The inventor asks for at least one grain. 
+    int rice_grain = 1; // The inventor asks for at least one grain. 
     cout << "square " << '\t' << "rice grains" << '\n'; 
-    for (int i = 1; i < 64; i++) {
+    for (int i = 1; i <= 64; i++) {
         cout << square << '\t' << rice_grain << '\n';
         rice_grain = rice_grain * 2; 
         square++;
