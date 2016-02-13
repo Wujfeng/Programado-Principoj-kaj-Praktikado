@@ -25,6 +25,7 @@ int main()
     char computer_answers = ' '; // stores the computer's response 
     
     while (cin >> c) {
+    
     // this piece of code is in while because it needs to run
     // every time the loop is repeated. 
     
@@ -55,7 +56,7 @@ int main()
                     break; 
              case 's':
                 if (computer_answers == 'r') {
-                    cout << "Computer guesses paper. You lose.\n"; 
+                    cout << "Computer guesses rocks. You lose.\n"; 
                     break; 
                     }
                 else 
@@ -63,7 +64,7 @@ int main()
                     break; 
              case 'p':
                 if (computer_answers == 's') {
-                    cout << "Computer guesses paper. You lose.\n"; 
+                    cout << "Computer guesses scissors. You lose.\n"; 
                     break; 
                     }
                 else 
