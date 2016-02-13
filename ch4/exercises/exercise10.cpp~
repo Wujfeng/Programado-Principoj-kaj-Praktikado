@@ -4,53 +4,72 @@
 
 #include <iostream> 
 #include <vector> 
+#include <cstdlib> 
 
 using namespace std; 
 
 int main()
 {
-    cout << "東京タワーを知っていますか。\n"; 
-    cout << "Let's play rock, paper and scissors.\n"; 
-    cout << "Enter (r)ock, (p)aper and (s)cissors to play.\n";
-    cout << "All other values will be rejected.\n"; 
-    
-    char c = ' '; // user input
-    char res = 's'; // random answer by the program
-    
-    vector <char> responses;
-    char user_input = ' '; 
-    
-    while (cin >> user_input) {
-        if ((user_input == 's') or 
-            (user_input == 'p') or 
-            (user_input == 'r')) {
-            
-            responses.push_back(user_input); 
-            }
-        
-        else 
-            cout << "Thank you!\n";
-            break; 
-        } 
+
+    cout << "Welcome to Rock, Paper and Scissors!\n"; 
+    cout << "You will play against a computer.\n"; 
+    cout << "When prompted for a response, you will enter "
+         << "either (r)ock, (p)aper or (s)scissor.\n";
+    cout << "Immediately the computer will offer its response,"
+         << " and the result.\n";
+         
+    cout << "Enough of talk! Enter your input: \n";  
+         
+    char c = ' '; // stores user's input
+    int computer_guesses; // stores a random number 
+    char computer_answers = ' '; // stores the computer's response 
     
     while (cin >> c) {
+    // this piece of code is in while because it needs to run
+    // every time the loop is repeated. 
+    
+        srand (time(NULL)); 
+        computer_guesses = rand() % 3 + 1;
+        
+         if (computer_guesses == 1) {
+            computer_answers = 'r';
+            }
+         if (computer_guesses == 2) {
+            computer_answers = 's';
+            }
+         if (computer_guesses == 3) {
+            computer_answers = 'p';
+            }
+         
+        // now the user input will be compared with the 
+        // computer's guess 
+        
         switch (c) {
             case 'r': 
-                if (res == 'p') cout << "It's a p. You lose!\n";
-                if (res == 's') cout << "It's an s. You win!\n";
-                if (res == 'r') cout << "It's an r. A draw!\n"; 
-                break; 
-            case 'p':
-                if (res == 'p') cout << "It's a p. A draw!\n";
-                if (res == 's') cout << "It's an s. You lose!\n";
-                if (res == 'r') cout << "It's an r. A win!\n";
-                break;
-            case 's': 
-                if (res == 'p') cout << "It's a p. You win!\n";
-                if (res == 's') cout << "It's an s. A draw!\n";
-                if (res == 'r') cout << "It's an r. You lose!\n";
-                break;
-            default: 
+                if (computer_answers == 'p') {
+                    cout << "Computer guesses paper. You lose.\n"; 
+                    break; 
+                    }
+                else 
+                    cout << "You win!\n";
+                    break; 
+             case 's':
+                if (computer_answers == 'r') {
+                    cout << "Computer guesses paper. You lose.\n"; 
+                    break; 
+                    }
+                else 
+                    cout << "You win!\n";
+                    break; 
+             case 'p':
+                if (computer_answers == 's') {
+                    cout << "Computer guesses paper. You lose.\n"; 
+                    break; 
+                    }
+                else 
+                    cout << "You win!\n";
+                    break; 
+             default:
                 cout << "Please enter a valid input.\n"; 
                 break;
             } 
