@@ -62,7 +62,7 @@ int finds_a_prime(int n)
 
 int main()
 {
-    for (int i = 5; i < 100; i++) {
+    for (int i = 5; i < 1000; i++) {
         finds_a_prime(i);
         }
         
