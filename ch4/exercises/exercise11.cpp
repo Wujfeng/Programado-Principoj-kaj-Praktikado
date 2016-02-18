@@ -3,6 +3,23 @@
     Store the primes in a vector.
 */
 
+/*
+    Strategy: 
+    1. Check if a number is even or odd. 
+    2. If it is even, it cannot be prime.
+    3. Move to the next number. Repeat step 1. 
+    4. If it is odd, divide it by the first prime number in your list.
+    5. If it divides (the modulus is zero), move to the next number and
+    repeat step 1. 
+    6. If the modulus is not zero, divide the number by the next prime
+    number in the list. Follow step 5 if the modulus is zero and step 
+    6 if the modulus is non-zero.
+    7. Repeat step 6 until the list of prime numbers is exhausted. 
+    8. Add the number to the prime numbers' list if the modulus remains
+    non-zero. 
+    9. Move to step 1. 
+*/
+
 #include <iostream> 
 #include <vector> 
 
@@ -10,35 +27,36 @@ using namespace std;
 
 int main()
 {
-    // A way to find out if a number is prime or not is to divide 
-    // it by all known primes that come before it or are smaller
-    // than it.
+    // A list of primes. 
+    vector <int> primes;
+    primes.push_back(2);
+    primes.push_back(3);
+    primes.push_back(5);
     
-    // I am going to start out with three known primes. 
+    int n = 6; 
     
-    vector <int> primes; 
-    
-    primes[0] = 2; 
-    primes[1] = 3; 
-    primes[2] = 5; 
-    
-    // Now I am going to loop the numbers from 1 to 100. 
-    // Any number divisible by these three known primes will
-    // be ignored. 
-    // Any number not divisible by these three known primes 
-    // will be added to the list of known primes. 
-    // The process will repeat itself until a prime number 
-    // equal to or greater than zero is not found. 
-    
-    
-    for (int i = 2; i < 100; i++) {
-        for (int j = 0; j < primes.size(); primes[j++]) {
-            if (i / primes[j]) {
-            }
-            else 
-                primes.push_back[i];
+    // As long as n is less than 100.
+    while (n < 100) { 
+    // Find out if n is even or odd. 
+        if ((n % 2) == 0) { 
+    // If it's even, increment is by 1 and 
+    // check if it is still less than 100. 
+            n++;       
             } 
-        } 
-        
-     return 0;
+    // If it's odd. 
+       else 
+    // Divide it by the first prime number in your list.
+       int prime_div_mod; // prime division modulus 
+       prime_div_mod = (n % primes[0]); 
+    // If it's a perfect division (mod == 0), increment n by 1 and
+    // check if n is still less than 100. 
+       if (prime_div_mod == 0) {
+           n++; 
+           }
+     // If the modulus is not 0, divide n by the next
+     // prime number in the list. 
+        prime_div_mod = (n % primes[1]); 
+         
+       else  
+    return 0;
 }
