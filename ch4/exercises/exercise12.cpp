@@ -3,7 +3,7 @@
 #include <vector> 
 #include <algorithm> 
 
-// divide n by all the prime numbers
+// divide n by all numbers less than n
 // store the modulus in a vector
 // sort the vector 
 // if modulus is zero for the first number, n is not a prime
@@ -16,10 +16,9 @@ int finds_a_prime(int n)
     vector <int> primes; 
     
     primes.push_back(2);
-    primes.push_back(3);
-    primes.push_back(5);
 
     vector <double> check_primes; 
+    
     double prime_store; 
     
     if ((n % 2) == 0) {
@@ -32,13 +31,18 @@ int finds_a_prime(int n)
             check_primes.push_back (prime_store); 
             } 
             
-        sort (check_primes.begin(), check_primes.end()); 
+        sort (check_primes.begin(), check_primes.end());
+        
         
         if (check_primes[0] == 0) {
             // do nothing;
             }
-        else 
-            cout << n << " ";
+        }
+        
+        primes.push_back(n);
+        
+        for (int j = 0; j < primes.size(); j++) {
+            cout << primes[j] << ' ';
         }
 } 
 
@@ -48,7 +52,7 @@ int main()
     int n; 
     cin >> n;
     
-    for (int i = 5; i < n; i++) {
+    for (int i = 2; i < n; i++) {
         finds_a_prime(i);
         }
     cout << '\n'; 
