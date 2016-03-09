@@ -17,18 +17,16 @@ int framed_area (int x, int y) {
 
 int main()
 try {
-  int x = -1; 
-  int y = 2; 
-  int z = 4; 
+  int x = -1 
+  int y = 2;
+  int z = 4;
 
-  int area1 = area (x, y); 
+  int area1 = area (x, y);
   int area2 = framed_area (1, z);
-  int area3 = area (y, z); 
-  double ratio = area1 / area3; 
+  int area3 = area (y, z);
+  double ratio = area1 / area3;
 }
 
 catch (Bad_area) {
   cout << "Oops! Bad arguments to area()\n.";
 }
-
-  
