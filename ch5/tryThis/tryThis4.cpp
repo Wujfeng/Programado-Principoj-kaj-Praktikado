@@ -4,5 +4,19 @@
 #include "std_lib_facilities.h" 
 using namespace std; 
 
-int main() {
-  
+int main()
+try {
+  cout << "Tell me your age: ";
+  int age; 
+  if (cin >> age) {
+      cout << "You are " << age << " years old." << endl; 
+  }
+  else
+      error ("The input wasn't correct.");
+  return 0;
+}
+
+catch (...) {
+  cerr << "The input was messed up." << endl;
+  return 1;
+}
