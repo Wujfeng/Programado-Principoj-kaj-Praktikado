@@ -3,45 +3,30 @@
 // Date: 2016-03-16
 // ex2: Debug the program. DONE
 // ex3: Don't let user enter a Celsius value lower than the absolute temperature. DONE
-// ex4: Do ex3 again. Handle the error inside ctok(). DONE
-// ex5: Add a new feature. Let the program convert both ways. DONE
+// ex4: Do ex3 again. Handle the error inside ctok().
 
 #include "std_lib_facilities.h"
 using namespace std;
 
 class lower_than_absolute{};
-class njevozmozhno{}; // Невозможно!
 
-double ctok (double celsius) {
-  double kelvin = 0.0;
-  if (celsius < -273.15) throw lower_than_absolute();
+double ctok (double c) {
+  if (c < -273.15) throw lower_than_absolute();
   else
-      kelvin = celsius + 273.15;
-  return kelvin;
-}
-
-double ktoc (double kelvin) {
-  double celsius = 0.0;
-  if (kelvin < 0) throw njevozmozhno(); // Это значит "невозможно." 
-  else
-      celsius = kelvin - 273.15;
-  return celsius;
+      double k = c + 273.15;
+  return k;
 }
 
 int main()
 try {
   double c = 0;
-  char ch = ' ';
   cout << "Enter temperature in Celsius: (Or any non-numerical value to quit.) ";
-  while (cin >> c >> ch) {
-      if ((ch == 'C') || (ch == 'c')) {
-              double kelvin = ctok (c);
-              cout << "You entered " << kelvin << "K." <<  endl;
-      }
-      if ((ch == 'K') || (ch == 'k')) {
-              double celsius = ktoc (c);
-              cout << "You entered " << celsius << " degrees Celsius." << endl;
-     }
+  while (cin {
+      if (c < -273.15) throw lower_than_absolute();
+      else {
+              double k = ctok (c);
+              cout << "You entered " << k << "K." <<  endl;
+           }
   }
   return 0;
 }
@@ -49,16 +34,6 @@ try {
 catch (lower_than_absolute) {
   cerr <<  "Temperature less than 0K. Unacceptable. Program exiting." << endl;
   return 1;
-}
-
-catch (njevozmozhno) {
-  cerr << "Conversion from Kelvin produces a result that's turns out to be less than zero Kelvin. It's impossible. Program quits." << endl; 
-  return 2; 
-}
-
-catch (...) {
-  cerr << "An error occured somewhere." << endl; 
-  return 3; 
 }
 
 /*
@@ -82,7 +57,7 @@ ex2.cpp:17:3: error: ‘Cout’ was not declared in this scope
    ^
 */
 
-/* ex2 code:
+/* ex3 code:
 
 class lower_than_absolute{};
 
