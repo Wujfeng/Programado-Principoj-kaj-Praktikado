@@ -3,7 +3,7 @@
 // Date: 2016-03-16
 // ex2: Debug the program. DONE
 // ex3: Don't let user enter a Celsius value lower than the absolute temperature. DONE
-// ex4: Do ex3 again. Handle the error inside ctok(). 
+// ex4: Do ex3 again. Handle the error inside ctok(). DONE
 
 #include "std_lib_facilities.h"
 using namespace std;
@@ -11,7 +11,10 @@ using namespace std;
 class lower_than_absolute{};
 
 double ctok (double c) {
-  double k = c + 273.15;
+  double k = 0.0;
+  if (c < -273.15) throw lower_than_absolute();
+  else
+      k = c + 273.15;
   return k;
 }
 
@@ -20,11 +23,8 @@ try {
   double c = 0;
   cout << "Enter temperature in Celsius: (Or any non-numerical value to quit.) ";
   while (cin >> c) {
-      if (c < -273.15) throw lower_than_absolute();
-      else {
-              double k = ctok (c);
-              cout << "You entered " << k << "K." <<  endl;
-           }
+      double k = ctok (c);
+      cout << "You entered " << k << "K." <<  endl;
   }
   return 0;
 }
@@ -53,4 +53,34 @@ ex2.cpp:16:22: error: cannot convert ‘const char*’ to ‘double’ for argum
 ex2.cpp:17:3: error: ‘Cout’ was not declared in this scope
    Cout << k << endl;
    ^
+*/
+
+/* ex2 code:
+
+class lower_than_absolute{};
+
+double ctok (double c) {
+  double k = c + 273.15;
+  return k;
+}
+
+int main()
+try {
+  double c = 0;
+  cout << "Enter temperature in Celsius: (Or any non-numerical value to quit.) ";
+  while (cin >> c) {
+      if (c < -273.15) throw lower_than_absolute();
+      else {
+              double k = ctok (c);
+              cout << "You entered " << k << "K." <<  endl;
+           }
+  }
+  return 0;
+}
+
+catch (lower_than_absolute) {
+  cerr <<  "Temperature less than 0K. Unacceptable. Program exiting." << endl;
+  return 1;
+}
+
 */
