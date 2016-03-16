@@ -1,4 +1,4 @@
-// Description: Debug a Celsius to Kelvin converter. Solve exercises from two to six.
+// Description: Debug a Celsius to Kelvin converter. Solve exercises from two to five.
 // Author: Четан Ананд (verdastelo)
 // Date: 2016-03-16
 // ex2: Debug the program. DONE
