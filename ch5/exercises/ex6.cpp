@@ -1,6 +1,7 @@
 // Description: Create a Celsius-Fahrenheit converter.
 // Author: Четан Ананд (verdastelo)
 // Program: Exercise 6
+// NOTE: The program is still buggy. It doesn't throw the right error messages and doesn't convert from Fahrenheit to Celsius.
 
 #include "std_lib_facilities.h"
 using namespace std;
