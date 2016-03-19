@@ -2,6 +2,7 @@
 // Author: Четан Ананд (verdastelo)
 // Program: Exercise 6
 // NOTE: The program is still buggy. It doesn't throw the right error messages and doesn't convert from Fahrenheit to Celsius.
+// NOTE: Conversion is okay. But the wrong error messages remain. 
 
 #include "std_lib_facilities.h"
 using namespace std;
@@ -14,7 +15,7 @@ double ftoc (double fah) { // ftoc = Fahrenheit to Celsius
   else {
       cel = ((5.0/9.0) * (fah - 32));
        }
-  if (cel > -273.15) throw lower_than_abs(); // 0K equals -273.15K
+  if (cel < -273.15) throw lower_than_abs(); // 0K equals -273.15K
   else return cel;
 }
 
