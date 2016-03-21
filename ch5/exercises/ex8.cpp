@@ -3,20 +3,28 @@
 // Description: A user enters numbers and the program asks the user how many of the entered numbers he or she wants added...
 // ...The user tells the program. And voila!
 // Task 1: The programs reads a series of numbers and stores them in a vector. DONE
-// Task 2: Ask how many of the numbers the user wants to sum. Call that number n.
+// Task 2: Ask how many of the numbers the user wants to sum. Call that number n. DONE
 // Task 3: Handle all inputs.
 // Take 4: Give an error message if n exceeds the vector's length.
 
 #include "std_lib_facilities.h"
 using namespace std;
 
-int main() {
+class non_int_input{};
+
+int main()
+try {
   cout << "Please enter some numbers: (Press \"|\" to stop): ";
   vector <int> num_storage; // Numbers' container.
   int i = 0;
-  while (cin >> i) { // Reads numbers.
-      num_storage.push_back(i); // Stores numbers.
-  }
+  if (!(cin >> i)) throw non_int_input();
+  else
+      while (cin >> i) { // Reads numbers.
+              num_storage.push_back(i); // Stores numbers.
+      }
+
+  cin.clear();
+  cin.ignore(1, ' ');
 
   cout << "Please enter how many of the numbers you wish to sum, starting from the first: ";
   int n = 0; // The number a user wants to sum.
@@ -29,4 +37,9 @@ int main() {
   cout << "The sum of " << n << " numbers is " << sum << "." << endl;
 
   return 0;
+}
+
+catch (non_int_input()) {
+  cerr << "The number you have entered is of type non-integer." << endl;
+  return 1;
 }
