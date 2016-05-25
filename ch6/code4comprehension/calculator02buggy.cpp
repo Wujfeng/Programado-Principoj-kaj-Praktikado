@@ -21,7 +21,7 @@
 
 //------------------------------------------------------------------------------
 
-class Token { // Changed "lass" to "class."
+class Token {	      // lass ਨੂੰ class ਵਿਚ ਬਦਲਿਆ।
 public:
     char kind;        // what kind of token
     double value;     // for numbers: a value
@@ -46,6 +46,9 @@ private:
 //------------------------------------------------------------------------------
 
 // The constructor just sets full to indicate that the buffer is empty:
+// Ч: Buffer is a Token and «full» is a boolean variable.
+// Ч: A false «full» indicates the absence of a Token. So no buffer (which is a Token)
+// Ч: is created.
 Token_stream::Token_stream()
 :full(false), buffer(0)    // no Token in buffer
 {
@@ -54,6 +57,10 @@ Token_stream::Token_stream()
 //------------------------------------------------------------------------------
 
 // The putback() member function puts its argument back into the Token_stream's buffer:
+// Ч: The argument is a Token, namely «t» in the following function definition.
+// Ч: If «full» is true, an error is thrown.
+// Ч: Else, Token t's value is stored into «buffer».
+// Ч: Then «full» is set to true, which breaks the loop (is this the correct word?).
 void Token_stream::putback(Token t)
 {
     if (full) error("putback() into a full buffer");
@@ -66,10 +73,10 @@ void Token_stream::putback(Token t)
 Token get()
 {
     if (full) {       // do we already have a Token ready?
-        // remove token from buffer
+        // remove token from buffer // Ч: by setting full to false.
         full=false;
         return buffer;
-    } 
+    }
 
     char ch;
     cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
@@ -77,12 +84,12 @@ Token get()
     switch (ch) {
     case ';':    // for "print"
     case 'q':    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/': 
+    case '(': case ')': case '+': case '-': case '*': case '/':
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
     case '5': case '6': case '7': case '9':
-        {    
+        {
             cin.putback(ch);         // put digit back into the input stream
             double val;
             cin >> val;              // read a floating-point number
@@ -95,7 +102,7 @@ Token get()
 
 //------------------------------------------------------------------------------
 
-Token_stream ts;        // provides get() and putback() 
+Token_stream ts;        // provides get() and putback()
 
 //------------------------------------------------------------------------------
 
@@ -109,10 +116,10 @@ double primary()
     Token t = ts.get();
     switch (t.kind) {
     case '(':    // handle '(' expression ')'
-        {    
+        {
             double d = expression();
             t = ts.get();
-            if (t.kind != ')') error("')' expected);
+            if (t.kind != ')') error("')' expected");
             return d;
         }
     case '8':            // we use '8' to represent a number
@@ -136,10 +143,10 @@ double term()
             left *= primary();
             t = ts.get();
         case '/':
-            {    
+            {
                 double d = primary();
                 if (d == 0) error("divide by zero");
-                left /= d; 
+                left /= d;
                 t = ts.get();
                 break;
             }
@@ -155,10 +162,10 @@ double term()
 // deal with + and -
 double expression()
 {
-    double left = term(;      // read and evaluate a Term
+    double left = term();      // read and evaluate a Term Ч: Corrected a syntax error.
     Token t = ts.get();        // get the next token from token stream
 
-    while(true) {    
+    while(true) {
         switch(t.kind) {
         case '+':
             left += term();    // evaluate Term and add
@@ -168,7 +175,7 @@ double expression()
             left += term();    // evaluate Term and subtract
             t = ts.get();
             break;
-        default: 
+        default:
             ts.putback(t);     // put t back into the token stream
             return left;       // finally: no more + or -: return the answer
         }
@@ -193,12 +200,12 @@ try
 	keep_window_open();
 }
 catch (exception& e) {
-    cerr << "error: " << e.what() << '\n'; 
+    cerr << "error: " << e.what() << '\n';
 	keep_window_open();
     return 1;
 }
 catch (...) {
-    cerr << "Oops: unknown exception!\n"; 
+    cerr << "Oops: unknown exception!\n";
 	keep_window_open();
     return 2;
 }
