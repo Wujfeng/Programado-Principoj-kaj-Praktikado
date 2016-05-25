@@ -11,9 +11,9 @@
 class Token {
 public:
     char kind;        // what kind of token
-    double value;     // for numbers: a value 
+    double value;     // for numbers: a value
     Token(char ch)    // make a Token from a char
-        :kind(ch), value(0) { }    
+        :kind(ch), value(0) { }
     Token(char ch, double val)     // make a Token from a char and a double
         :kind(ch), value(val) { }
 };
@@ -28,12 +28,12 @@ Token get_token()    // read a token from cin
     switch (ch) {
  //not yet   case ';':    // for "print"
  //not yet   case 'q':    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/': 
+    case '(': case ')': case '+': case '-': case '*': case '/':
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
     case '5': case '6': case '7': case '8': case '9':
-        {    
+        {
             cin.putback(ch);         // put digit back into the input stream
             double val;
             cin >> val;              // read a floating-point number
@@ -58,8 +58,8 @@ double primary()     // read and evaluate a Primary
 {
     Token t = get_token();
     switch (t.kind) {
-    case '(':    // handle '(' expression ')'
-        {    
+    case '(':       // handle '(' expression ')'
+        {
             double d = expression();
             t = get_token();
             if (t.kind != ')') error("')' expected");
@@ -77,16 +77,16 @@ int main()
 try {
     while (cin)
         cout << expression() << '\n';
-    keep_window_open("~0");
+//    keep_window_open("~0");
 }
 catch (exception& e) {
     cerr << e.what() << endl;
-    keep_window_open ("~1");
+//    keep_window_open ("~1");
     return 1;
 }
 catch (...) {
     cerr << "exception \n";
-    keep_window_open ("~2");
+//    keep_window_open ("~2");
     return 2;
 }
 
