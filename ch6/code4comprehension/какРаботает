@@ -1,0 +1,20 @@
+A sketch of how calculator00.cpp works for expression 2+3.
+
+1. expression() is called.
+2. In expression(), term() is called.
+3. In term(), primary() is called.
+4. In primary(), get_token() is called.
+5. get_token() returns a char or a double. In this case, it returns 2 (a double) which is stored into Token t in primary().
+6. primary() returns t.value, which happens to be double 2.
+7. What primary() returns is stored into left in term().
+8. get_token() is called again.
+9. This time it returns a Token with ch == '+' and no val.
+10. term() evaluates ch which is neither '*' nor '/' so return the left, which happens to be 2.
+11. What term() returns is stored into left in expression().
+12. get_token() is called once more.
+13. get_token() returns '+' which triggers case '+' in expression().
+14. term() is called, which in turn calls primary().
+15. primary() calls get_token() which returns a double 3.
+16. double 3 is stored into left in term().
+17. In step 13, the term() is evaluated.
+18. left is returned which is printed out on the screen.
