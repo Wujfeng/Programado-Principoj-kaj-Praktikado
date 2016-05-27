@@ -1,0 +1,14 @@
+//------------------------------------------------------------------------------
+
+1. Token is a user-defined type or a class.
+2. It is made of two fundamental types, char and double, and two constructs.
+3. The first construct makes a Token from a char and the second makes a Token
+  from a char and a double.
+4. In the second case, a double is the argument. The construct uses '8' (for
+  reasons known only to Bjarne Stroustrup ~_^) as a char to create a Token.
+
+//------------------------------------------------------------------------------
+
+Token_stream::Token_stream()
+1. When Token_stream() is called, it sets «full» to false and «buffer» to zero.
+2. 
