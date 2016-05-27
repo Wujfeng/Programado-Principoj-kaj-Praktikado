@@ -8,6 +8,18 @@
 
 //------------------------------------------------------------------------------
 
+/*
+
+ 1. Token is a user-defined type or a class.
+ 2. It is made of two fundamental types, char and double, and two constructs.
+ 3. The first construct makes a Token from a char and the second uses a char
+    and a double as raw material.
+ 4. In the second case, a double is the argument. The construct uses '8' (for
+   reasons known only to Bjarne Stroustrup ~_^) as a char (kind) to create
+   a Token.
+
+*/
+
 class Token {
 public:
     char kind;        // what kind of token
@@ -19,6 +31,20 @@ public:
 };
 
 //------------------------------------------------------------------------------
+
+/*
+
+  1. Token_stream is a class with three constructs:
+    - Token_stream();
+    - Token get();
+    - void putback (Token t);
+  2. Token_stream() reads from cin.
+  3. get() reads from Token_stream() and returns a Token.
+  4. putback (Token t) inserts a Token back into Token_stream.
+  5. To function properly, the constructs rely on a boolean variable « full »
+      and a Token « buffer. »
+
+*/
 
 class Token_stream {
 public:
@@ -32,11 +58,28 @@ private:
 
 //------------------------------------------------------------------------------
 
+/*
+
+  1. When Token_stream() is called, it sets full to zero and buffer to ?
+  2. RANDOM THOUGHT: Is 0 in buffer (0) a char or a double?
+  3. RANDOM ANSWEr: Because 0 is not bounded by two single quotes, it's a double.
+      C++ converts the double into a char. In ASCII, 0's value is 0. So that
+      leaves us with a Token with no kind and zero val.
+  4. Token_stream() sets full to zero and empties the buffer, if that's the
+      right phrase.
+
+*/
+
 Token_stream::Token_stream()
     :full (false), buffer (0) { }
 
 //------------------------------------------------------------------------------
 
+/*
+
+  1. putback() puts Token t into the buffer and sets full to true.
+
+*/
 void Token_stream::putback (Token t) {
   if (full) error ("putback() into a full buffer.");
   buffer = t;
@@ -44,6 +87,24 @@ void Token_stream::putback (Token t) {
 }
 
 //------------------------------------------------------------------------------
+
+/*
+
+  1. get() commences by checking buffer. If there is a Token in the buffer, it
+      is returned.
+  2. If the buffer happens to be empty, the character ch is analysed.
+  3. A Token is created is ch is a char.
+  4. But if ch is a double, cin.putback() is called.
+  RANDOM THOUGHT: What does cin.putback() do?
+  RANDOM ANSWER: It throws ch back into istream.
+  RANDOM THOUGHT: How does the program separate 1 from 12 or 123?
+  RANDOM ANSWER: It happens as if by magic. cin works like Token_stream() and
+      reads the whole number. How does it do it? Well, it seems I need to wait
+      to learn that. (pp. 212, Section 6.8.3 Reading numbers)
+  5. With cin.putback(), double chars are read into val.
+  6. val is used to create a Token.
+
+*/
 
 // get() produces a Token.
 Token Token_stream::get() {
