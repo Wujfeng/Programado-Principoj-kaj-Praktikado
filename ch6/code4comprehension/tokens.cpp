@@ -6,10 +6,10 @@
 
 class Token {
 public:
-  char kind;
-  double value;
+  char kind = 'x';
+  double value = 1979;
   Token (char ch)
-      :kind (ch), value (0) {}
+      :kind (ch), value (1979) {}
   Token (char ch, double val)
       :kind (ch), value (val) {}
 };
@@ -24,8 +24,8 @@ int main() {
   cout << "rupiah is a Token of kind «" << rupiah.kind << "» and value «" << rupiah.value << "»" << endl;
 
 
-  Token test = Token (200);
-  cout << "Token test = Token (200);" << endl;
+  Token test = Token (65);
+  cout << "Token test = Token (65);" << endl;
   cout << "test is a Token of kind «" << test.kind << "» and value «" << test.value << "»" << endl;
 
 /*
