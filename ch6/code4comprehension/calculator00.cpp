@@ -52,7 +52,7 @@ public:
     Token get();
     void putback (Token t);
 private:
-    bool full;
+    bool full = false;
     Token buffer;
 };
 
@@ -179,6 +179,9 @@ double term();        // read and evaluate a Term
   6. In the second case, t.value is returned.
   7. Any other scenario returns an error message.
 
+  8. Do you what (7) means? It means there is no provision to handle
+      mathematical operators. Dio mia!
+
 */
 
 double primary()     // read and evaluate a Primary
@@ -243,14 +246,16 @@ double term()
 
 /*
 
-  1. 
+  1. left is a double that stores the double returned by term().
+  2. ts.get() returns a Token which is stored into t.
+  3. 
 
 */
 
 double expression()
 {
     double left = term();      // read and evaluate a Term
-    Token t = ts.get();     // get the next token
+    Token t = ts.get();        // get the next token
     while(true) {
         switch(t.kind) {
         case '+':
