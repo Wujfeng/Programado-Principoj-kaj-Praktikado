@@ -52,7 +52,7 @@ public:
     Token get();
     void putback (Token t);
 private:
-    bool full = false;
+    bool full;
     Token buffer;
 };
 
@@ -71,7 +71,7 @@ private:
 */
 
 Token_stream::Token_stream()
-    :full (false), buffer (0) { }
+    :full (true), buffer (0) { }
 
 //------------------------------------------------------------------------------
 
@@ -237,6 +237,7 @@ double term()
                 break;
             }
         default:
+            ts.putback(t);
             return left;
         }
     }
@@ -248,7 +249,8 @@ double term()
 
   1. left is a double that stores the double returned by term().
   2. ts.get() returns a Token which is stored into t.
-  3. 
+  3. If the t's kind is +, left is added to t's value. Ditto with -.
+  4. Unused Tokens are putback into the stream.
 
 */
 
@@ -260,7 +262,7 @@ double expression()
         switch(t.kind) {
         case '+':
             left += term();    // evaluate Term and add
-            t = ts.get();;
+            t = ts.get();
             break;
         case '-':
             left -= term();    // evaluate Term and subtract
@@ -280,11 +282,16 @@ try {
     double val = 0;
     while (cin) {
       Token t = ts.get();
-      if (t.kind == 'q') break;
-      if (t.kind = ';')
-        cout << "= " << expression() << '\n';
-      else
+      if (t.kind == 'q') {
+        cout << "Exiting..." << endl;
+        break;
+      }
+      if (t.kind = ';') {
+        cout << "= " << val << '\n';
+      }
+      else {
         ts.putback(t);
+      }
       val = expression();
     }
 }
