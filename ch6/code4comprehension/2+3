@@ -1,2 +1,12 @@
 1. calculator00.cpp is compiled and run.
-2. 
+2. A user inputs « 2+3; » and presses Enter.
+3. int main() springs into action.
+4. val is initialized to zero.
+5. The code block in while executes because cin is true.
+    Remember a user input « 2+3; »
+6. A Token t is declared and ts.get() is called.
+7. In ts.get(), if full is true (which it is after a recent)
+    full is set to false and buffer, whose value is zero, is
+    returned.
+8. calculator00.cpp reads the expression « 2 + 3 » after that.
+9. 
