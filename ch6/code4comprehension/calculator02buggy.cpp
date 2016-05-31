@@ -1,4 +1,3 @@
-
 //
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Software - Principles and Practice using C++" by Bjarne Stroustrup
@@ -14,6 +13,17 @@
 	If that gets tedious, compare the code to that in the book (or posted source code)
 
 	Happy hunting!
+
+*/
+
+/*
+
+	1. Drill 1: ਪ੍ਰੋਗ੍ਰਾਮ ਹੁਣ ਕੰਪਾਈਲ ਕਰਦਾ ਹੈ।
+	2. Drill 2: q ਦੀ ਥਾਂ ਹੁਣ x ਦੱਬਣ ਨਾਲ ਪ੍ਰੋਗ੍ਰਾਮ ਕਵਿਟ ਕਰ ਜਾਂਦਾ ਹੈ।
+	3. Drill 3: ; ਦੀ ਜਗ੍ਹਾ ਹੁਣ = ਐਨਟਰ ਕਰਨ ਨਾਲ ਰਿਜ਼ਲਟ ਦਿਖ ਜਾਂਦਾ ਹੈ।
+	4. Drill 4: ਇੱਕ ਗ੍ਰੀਟਿੰਗ ਐਡ ਕੀਤੀ।
+	5. Drill 5: ਚਾਰ ਲਾਈਨਾ ਲਿੱਖਿਆਂ ਜੋ ਕਿ ਕਿਸੇ ਯੂਜ਼ਰ ਨੂੰ ਪ੍ਰੋਗ੍ਰਾਮ ਕਿਵੇੇਂ ਵਰਤਣਾ ਹੈ ਇਹ
+                     ਸਮਝਣ ਵਿਚ ਮਦਦ ਕਰਦੀਆਂ ਹਲ. 
 
 */
 
@@ -50,9 +60,7 @@ private:
 // Ч: A false «full» indicates the absence of a Token. So no buffer (which is a Token)
 // Ч: is created.
 Token_stream::Token_stream()
-:full(false), buffer(0)    // no Token in buffer
-{
-}
+    : full(false), buffer(0) { }    // no Token in buffer
 
 //------------------------------------------------------------------------------
 
@@ -70,7 +78,7 @@ void Token_stream::putback(Token t)
 
 //------------------------------------------------------------------------------
 
-Token get()
+Token Token_stream::get()  // get() ਨੂੰ Token_stream class ਦਾ ਹਿੱਸਾ ਬਣਾਇਆ।
 {
     if (full) {       // do we already have a Token ready?
         // remove token from buffer // Ч: by setting full to false.
@@ -82,13 +90,13 @@ Token get()
     cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
 
     switch (ch) {
-    case ';':    // for "print"
-    case 'q':    // for "quit"
+    case '=':    // for "print"
+    case 'x':    // for "quit"
     case '(': case ')': case '+': case '-': case '*': case '/':
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
-    case '5': case '6': case '7': case '9':
+    case '5': case '6': case '7': case '8': case '9': // case '8': ਮੀਸੀੰਗ ਸੀ।
         {
             cin.putback(ch);         // put digit back into the input stream
             double val;
@@ -107,6 +115,10 @@ Token_stream ts;        // provides get() and putback()
 //------------------------------------------------------------------------------
 
 double expression();    // declaration so that primary() can call expression()
+
+//------------------------------------------------------------------------------
+
+double term();		// Ч: Inserted this declaration.
 
 //------------------------------------------------------------------------------
 
@@ -142,6 +154,8 @@ double term()
         case '*':
             left *= primary();
             t = ts.get();
+            // SECOND LOGICAL ERROR: There was no break statement here. Inserted it.
+            break;
         case '/':
             {
                 double d = primary();
@@ -172,7 +186,10 @@ double expression()
             t = ts.get();
             break;
         case '-':
-            left += term();    // evaluate Term and subtract
+            // First logical error. The program doesn't substract.
+            // left += term();    // evaluate Term and subtract
+            // Debugged line of code.
+            left -= term();
             t = ts.get();
             break;
         default:
@@ -187,26 +204,39 @@ double expression()
 int main()
 try
 {
+    // ਇੱਕ ਗ੍ਰੀਟਿੰਗ ਐਡ ਕੀਤੀ।
+
+    cout << "Welcome to our calculator." << endl;
+    cout << "Please enter expressions using float point numbers." << endl;
+    cout << "This program can perform the operations of addition, substraction, multiplication and divisions on two or more than two operands." << endl;
+    cout << "Enter your expressions and end them in = (equals sign)." << endl;
+    cout << "An simple expression looks like this: 2+3" << endl;
+    cout << "A more complicated expression may have this shape: 2+(100-2)*3/4" << endl;
+    cout << endl;
+    cout << endl;
+    double val = 0;		  // val ਨੂੰ ਡਿਕਲੇਅਰ ਅਤੇ ਇਨੀਸ਼ੀਅਲਾਈਜ਼ ਕੀਤਾ।
     while (cin) {
+        cout << "> "; 
         Token t = ts.get();
 
-        if (t.kind == 'q') break; // 'q' for quit
-        if (t.kind == ';')        // ';' for "print now"
-            cout << "=" << val << '\n';
-        else
+        if (t.kind == 'x') break; // 'q' for quit
+        if (t.kind == '=') {        // ';' for "print now"
+            cout << val << '\n';
+        }
+        else {
             ts.putback(t);
+        }
         val = expression();
     }
-	keep_window_open();
 }
+
 catch (exception& e) {
     cerr << "error: " << e.what() << '\n';
-	keep_window_open();
     return 1;
 }
+
 catch (...) {
     cerr << "Oops: unknown exception!\n";
-	keep_window_open();
     return 2;
 }
 
