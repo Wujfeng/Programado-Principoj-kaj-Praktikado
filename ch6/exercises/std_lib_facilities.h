@@ -82,12 +82,12 @@ template< class T> struct Vector : public std::vector<T> {
 	using std::vector<T>::vector;	// inheriting constructor
 #endif
 
-	T& operator[](unsigned int i) // rather than return at(i);
+	T& operator[](signed int i) // rather than return at(i);
 	{
 		if (i<0||this->size()<=i) throw Range_error(i);
 		return std::vector<T>::operator[](i);
 	}
-	const T& operator[](unsigned int i) const
+	const T& operator[](signed int i) const
 	{
 		if (i<0||this->size()<=i) throw Range_error(i);
 		return std::vector<T>::operator[](i);
@@ -102,7 +102,7 @@ struct String : std::string {
 	using size_type = std::string::size_type;
 //	using string::string;
 
-	char& operator[](unsigned int i) // rather than return at(i);
+	char& operator[](signed int i) // rather than return at(i);
 	{
 		if (i<0||size()<=i) throw Range_error(i);
 		return std::string::operator[](i);
