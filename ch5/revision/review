@@ -1,0 +1,48 @@
+Review
+
+1. Name four major types of errors and briefly define each one.
+The four major types of errors are – compile time, link time, run time, and logical errors. Compile time errors are mainly syntactical mistakes that creep into our programs. Link time errors occur when a function is defined at more than one place in a program. Run time errors are chiefly caused by an unexpected input. Finally, logical errors suggest the program doesn't do what it was intended to do.
+
+2. What kind of errors can we ignore in student programs?
+We can ignore errors originating from hardware and system software failure. We can also ignore how to terminate a program after encountering an error.
+
+3. What guarantees should every completed project offer?
+The project should produce desired results for correct input and reasonable error messages for unexpected input.
+
+4. List three approaches we can take to eliminate errors in programs and produce acceptable results.
+Organize software, debug, and ensure the remaining errors aren't serious.
+
+5. Why do we hate debugging?
+Because it isn't considered cool in the popular culture where expert programmers dash off a few lines of code to hack into the International Space Station's (ISS) computers.
+
+6. What is a syntax error? Give five examples.
+A syntactical error is an orthographic mistake. Here are five examples. (a) INT x = 0; (INT is in caps). (b) doble y = 0; (double is spelled wrongly). (c) char c = 'a' (There is no semi-colon at the statement's end). (d) int num == 5; (== isn't the assignment operator). (e) area (length; breath); (There should be a comma between length and breadth).
+
+7. What is a type error? Give five examples.
+A type error occurs when the compiler can't figure out how to interpret a statement. Types hold the torch here, but type mismatching can wreck havoc this mechanism. Here are five examples. (a) int x = “x”; (A string is assigned to x instead of an integer). (b) char c = “x”; (A string is assigned to c instead of a char). (c) square (3); (The exponent is missing from the arguments' list). (d) j = 10; (J's type isn't declared). (e) string str1 = “Hello,”; string str2 = “ world!”; str1 – str2; (The minus operator doesn't work with string operands.)
+
+8. What is a linker error? Give three examples.
+The linker connects source code with object code to produce an executable. Many things can go wrong when linker goes about its work. (a) and (b) A function can be defined at more than one place—differing in its function body or return type. (c) A function isn't defined.
+
+9. What is a logic error? Give three examples.
+Sometimes the program compiles and run but doesn't do what we wanted it to do. That usually happens because of logic errors. Here are three examples. (a) int x = 8; int y = 3; int z = x/y; (The result isn't 2.666... but 2). (b) for (int x = 0; x <= vector.size(); ++x); (The equals-to-or-less-than sign between x and vector.size() should have been “less than”). (c) int length = 0; int breadth = 0; area = length * breadth; (Area can be negative if either length or breadth is less than zero.)
+
+10. List four potential sources of errors discussed in the text.
+(a) Ambiguous specification. (b) Unspecified input. (c) Unspecified state. (d) Logical errors. (e) Unspecified arguments. (f) Poor error handling.
+
+
+Notes
+
+A way to classify errors is – compile time, link time, run time, and logic errors.
+Five principles of error elimination you can assume most of the time. (a) The program should produce correct output for the right input and (b) meaningful error messages for the wrong input. (c) The program should not worry about hardware failure. (d) The program shouldn't worry about system software acting up. (e) The program should be able to terminate after running into an error.
+Three guidelines to eliminate errors. Organize software to minimize errors, debug and test, and make sure the remaining errors aren't serious.
+Six sources of errors. (a) Poor specification. (b) Incomplete programs. (c) Unexpected arguments. (d) Unexpected input. (e) Unexpected state. (f) Logical errors.
+Three compile time errors are: (a) Syntax errors, (b) Type errors, and (c) Non-errors (logical errors).
+A function defined at more than one place in a program or with wrong types is a source of link time errors.
+Memorize the term translation units.
+Who should deal with errors? The caller or the callee?
+Estas facile kontroli programojn per la vokita programo. Pro kio oni ĝin ne faras. Pro kvar ĉefaj kialoj: (a) Programistoj estas malpermisataj redakti funkciojn, kiuj estas parto de la norma biblioteko. (b) Estas malfacile antaŭscii por funkciistoj, kion fari per eraroj. (c) Funkcioj povas esti vokataj de ie. Pro tio la erarmesaĝoj originataj de ili ofte estas neprecizaj. (d) Erarmesaĝoj produkataj de funkcioj ofte longigas la funkcion.
+Because it's so complex to deal with errors either through the called or the callee function, professionals use exceptions.
+Exceptions separate how an error is detected from what to do with it.
+Learn how to handle errors stemming from bad arguments, range exceeds, and bad input.
+
