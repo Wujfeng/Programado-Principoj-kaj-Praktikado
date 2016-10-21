@@ -30,6 +30,68 @@ Sometimes the program compiles and run but doesn't do what we wanted it to do. T
 10. List four potential sources of errors discussed in the text.
 (a) Ambiguous specification. (b) Unspecified input. (c) Unspecified state. (d) Logical errors. (e) Unspecified arguments. (f) Poor error handling.
 
+Friday, October 21, 2016
+
+11. How do you know if a result is plausible? What techniques do you have to answer such questions?
+We rely on commonsense and the World Wide Web to figure out if an answer is plausible.
+
+12. Compare and contrast having the caller of a function handle a run-time error vs. the called function's handling the run-time error.
+If a caller were to handle an exception every time, we'll have to write it as many times as a function is called. This is unwieldy.  Having the callee handle run-time errors isn't feasible in large programs because the function's writer can't conceivably think of all the uses his program will be subjected to.
+
+13. Why is exceptions a better idea than returning an error value?
+Because they allow us to decide what to do with the program once an error shows up.
+
+14. How do you test if an input operation succeeded?
+It's simple. Use if (!cin);
+
+15. Describe the process of how exceptions are thrown and caught?
+Exceptions are thrown by functions. A function, if it accepts arguments, can protect itself against unwanted input. Each time the protection mechanism gets activated it throws an exception. An exception is an error message. Catch() catches the exception and decides what to do with it.
+
+16. Why, with a vector v, is v[v.size()] a range error? What would be the result of calling this?
+The element v[v.size()] refers to an index that exceeds the vector's length by one. So it produces an range error which is classified as a run-time error.
+
+17. Define pre-condition and post-condition; give an example (that's not the area() function from this chapter), preferably a computation that requires a loop.
+Pre-conditions are tests we run on functions to ensure the accuracy of arguments. In the same vein, post-conditions can check the accuracy of return values. A computation with a pre- and post-conditions are in prepostcond.cpp. 
+
+Saturday, October 22, 2016
+
+18. When would you not test a pre-condition?
+There are three scenarios where pre-condition checking can be ignored. (a) It slows down your code. (b) It adds complexity beyond what you're willing to handle. (c) You're sure no one will give bad input.
+
+19. When would you not test a post-condition?
+Same as 18.
+
+20. What are the steps in debugging a program?
+Here is some advice. (a) Start with syntax errors. Your compiler can help here. (b) Read your code like a compiler. (c) Check little code at one time. (d) Use invariants to find bugs.
+
+21. Why does commenting help when debugging?
+It provides information that's essential to reading code correctly but isn't captured in the code.
+
+22. How does testing differ from debugging?
+Debugging is mainly about reading code. It's passive. Testing involves systematically running the program on a series of carefully selected input and test the program's output with the data you already have.
+
+Terms
+
+Argument error. A run-time error that occurs when a function doesn't get the correct type and number of arguments.
+Assertion. 
+Catch. A way to handle error message printing.
+Compile-time error. Error that doesn't let a compiler to compile code. Syntactic errors are compile-time errors.
+Container. 
+Debugging. Systematic removal of errors from a program.
+Error. A deviation that doesn't (a) let a program compile, (b) link, (c) run, or (d) produce correct results.
+Exception. A way to handle errors.
+Invariant. The part of a program that never changes.
+Link-time error. Errors linked with the linker. They typically stem from defining a function twice or not defining it at all.
+Logic error. Errors that compile and run but don't produce the correct output.
+Post-condition. A way to check errors in a function after it's run.
+Pre-condition. A way to check errors in a function before it's run.
+Range error. Errors originating from exceeding a vector's capacity to hold data. 
+Requirement. Definition of what a program is supposed to do.
+Run-time error. Errors originating during the running of a program.
+Syntax error. Orthographic mistakes in code.
+Testing. A systematic way to run a program against a large number of input values and analyze the results.
+Throw. A way to handle errors.
+Type error. Errors stemming from mismatched types.
 
 Notes
 
@@ -45,4 +107,3 @@ Estas facile kontroli programojn per la vokita programo. Pro kio oni ĝin ne far
 Because it's so complex to deal with errors either through the called or the callee function, professionals use exceptions.
 Exceptions separate how an error is detected from what to do with it.
 Learn how to handle errors stemming from bad arguments, range exceeds, and bad input.
-
