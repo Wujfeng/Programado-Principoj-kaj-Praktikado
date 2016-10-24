@@ -1,6 +1,13 @@
+// calculator00.cpp
+// Study an elementary version of a calculator designed by Bjarne Stroustrup.
+// Bjarne Stroustrup (Modifications: verdastelo)
+// 2016-10-24
+
 #include "std_lib_facilities.h"
 
 //------------------------------------------------------------------------------
+// This part declares and defines the class Token.
+// A token is made of two fundamental kinds, char and double.
 
 class Token {
 public:
@@ -13,6 +20,10 @@ public:
 };
 
 //------------------------------------------------------------------------------
+// get_token() reads one char at a time and stores the chars in cin.
+// The stored chars are then converted into Tokens.
+// chars with only digits and a dot are converted into Tokens (ch, double).
+// chars with only other chars are converted into Tokens (ch).  
 
 Token get_token()    // read a token from cin
 {
@@ -39,14 +50,17 @@ Token get_token()    // read a token from cin
 }
 
 //------------------------------------------------------------------------------
+// This is a declaration.
 
 double expression();  // read and evaluate a Expression
 
 //------------------------------------------------------------------------------
+// This is a term() declaration.
 
 double term();        // read and evaluate a Term
 
 //------------------------------------------------------------------------------
+// This is primary's definition.
 
 double primary()     // read and evaluate a Primary
 {
@@ -71,16 +85,13 @@ int main()
 try {
     while (cin)
         cout << expression() << '\n';
-    keep_window_open("~0");
 }
 catch (exception& e) {
     cerr << e.what() << endl;
-    keep_window_open ("~1");
     return 1;
 }
 catch (...) {
     cerr << "exception \n";
-    keep_window_open ("~2");
     return 2;
 }
 
