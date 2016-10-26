@@ -84,7 +84,7 @@ double primary()     // read and evaluate a Primary
 int main()
 try {
     while (cin)
-        cout << expression() << '\n';
+        cout << "> " << expression() << '\n';
 }
 catch (exception& e) {
     cerr << e.what() << endl;
