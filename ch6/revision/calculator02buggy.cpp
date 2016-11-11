@@ -56,6 +56,10 @@ void Token_stream::putback(Token t)
 
 //------------------------------------------------------------------------------
 
+Token_stream ts;        // provides get() and putback() 
+
+//------------------------------------------------------------------------------
+
 Token get()
 {
     if (full) {       // do we already have a Token ready?
@@ -88,7 +92,7 @@ Token get()
 
 //------------------------------------------------------------------------------
 
-Token_stream ts;        // provides get() and putback() 
+// Token_stream ts;        // provides get() and putback() 
 
 //------------------------------------------------------------------------------
 
