@@ -1,6 +1,6 @@
 /* This file is known as calculator02buggy.cpp
 
-	I have inserted 5 errors that should cause this not to compile
+	I have inserted 5 errors that should cause this not to compile - DONE УРА! 
 	I have inserted 3 logic errors that should cause the program to give wrong results
 
 	First try to find an remove the bugs without looking in the book.
@@ -14,6 +14,8 @@
 
 //------------------------------------------------------------------------------
 
+// Понял.
+
 class Token { // Error 1: "class" was written "lass."
 public:
     char kind;        // what kind of token
@@ -25,6 +27,8 @@ public:
 };
 
 //------------------------------------------------------------------------------
+
+// 
 
 class Token_stream {
 public: 
@@ -38,14 +42,19 @@ private:
 
 //------------------------------------------------------------------------------
 
+// Понял
+// Everytime Token_stream() is called, it sets the Boolean variable full to false
+// and it assigns t.kind == NUL and t.value == 0 to buffer.
+
 // The constructor just sets full to indicate that the buffer is empty:
-Token_stream::Token_stream()
+Token_stream::Token_stream() 
 :full(false), buffer(0)    // no Token in buffer
-{
+{ 
 }
 
 //------------------------------------------------------------------------------
 
+// Понял
 // The putback() member function puts its argument back into the Token_stream's buffer:
 void Token_stream::putback(Token t)
 {
@@ -56,11 +65,11 @@ void Token_stream::putback(Token t)
 
 //------------------------------------------------------------------------------
 
-Token_stream ts;        // provides get() and putback() 
+// Find out how break and return are different.
+// How does cin.putback() stop reading numbers.
+//  
 
-//------------------------------------------------------------------------------
-
-Token get()
+Token Token_stream::get()	// Error 2: get() couldn't access full. Made it a Token_stream() function.
 {
     if (full) {       // do we already have a Token ready?
         // remove token from buffer
@@ -72,13 +81,13 @@ Token get()
     cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
 
     switch (ch) {
-    case ';':    // for "print"
-    case 'q':    // for "quit"
+    case 'x':    // for "print"
+    case '=':    // for "quit"
     case '(': case ')': case '+': case '-': case '*': case '/': 
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
-    case '5': case '6': case '7': case '8': case '9': // Error 2: case '8': was missing.
+    case '5': case '6': case '7': case '8': case '9': // Error 3: case '8': was missing.
         {    
             cin.putback(ch);         // put digit back into the input stream
             double val;
@@ -92,7 +101,7 @@ Token get()
 
 //------------------------------------------------------------------------------
 
-// Token_stream ts;        // provides get() and putback() 
+Token_stream ts;        // provides get() and putback() 
 
 //------------------------------------------------------------------------------
 
@@ -100,11 +109,11 @@ double expression();    // declaration so that primary() can call expression()
 
 //------------------------------------------------------------------------------
 
-double term(); 		// declaration so that term() can be called
+// double term(); 		// declaration so that term() can be called
 
 //------------------------------------------------------------------------------
 
-double primary(); 	// declaration so that primary() can be called
+// double primary(); 	// declaration so that primary() can be called
 
 //-----------------------------------------------------------------------------
 
@@ -140,6 +149,7 @@ double term()
         case '*':
             left *= primary();
             t = ts.get();
+	    break; 		// Devious 2: There was no break.
         case '/':
             {    
                 double d = primary();
@@ -160,7 +170,7 @@ double term()
 // deal with + and -
 double expression()
 {
-    double left = term();      // read and evaluate a Term // Error 3: Term() was written Term( - the right parenthesis was missing.
+    double left = term();      // read and evaluate a Term // Error 4 Term() was written Term( - the right parenthesis was missing.
     Token t = ts.get();        // get the next token from token stream
 
     while(true) {    
@@ -170,7 +180,7 @@ double expression()
             t = ts.get();
             break;
         case '-':
-            left += term();    // evaluate Term and subtract
+            left -= term();    // evaluate Term and subtract // Devious 1: left += term
             t = ts.get();
             break;
         default: 
@@ -185,15 +195,18 @@ double expression()
 int main()
 try
 {
+    cout << "This is a calculator." << endl;
+    cout << "Print x to quit and = to see results." << endl;
     while (cin) {
         Token t = ts.get();
-
-        if (t.kind == 'q') break; // 'q' for quit
-        if (t.kind == ';')        // ';' for "print now"
+        double val = t.value;	  // Error 5: val was not defined. 
+        if (t.kind == 'x') break; // 'x' for quit
+        if (t.kind == '=')        // '=' for "print now"
             cout << "=" << val << '\n';
-        else
+        else {
             ts.putback(t);
-        val = expression();
+            val = expression();
+        }
     }
 }
 catch (exception& e) {

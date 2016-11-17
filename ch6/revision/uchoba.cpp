@@ -16,11 +16,14 @@ public:
 };
 
 int main() {
-  Token t = Token (a);
+  Token t = Token ('a');
   cout << "t.kind is " << t.kind << " and t.value is " << t.value << endl;
 
   Token t1 = Token (0);
   cout << "t1.kind is " << t1.kind << " and t1.value is " << t1.value << endl;
+
+  Token t2 = Token ('b', 1979);
+  cout << "t2.kind is " << t2.kind << " and t2.value is " << t2.value << endl;
  
   return 0;
 }
