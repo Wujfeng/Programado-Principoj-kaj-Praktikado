@@ -1,0 +1,51 @@
+te 2 + 3 = 
+
+1. while (cin) // As long as there is input
+2. Token t = ts.get(); // Create a Token t and invoke the function ts.get()
+3. Inside ts.get(), if (full) is false because Token_stream() sets full to false and buffer to zero.
+4. A character ch is declared. cin is read into ch.
+5. cin happens to be 2. 
+6. cin.putback(ch) is called. It's a Standard Library function.
+7. putback() puts ch back into cin.
+8. cin is read into val. Reading into cin stops as soon as a non-numeric ch is encountered.
+9. A Token of type t ('8', val) is returend.
+10. That Token initialises Token t with the value ('8', 2).
+11. Because t.kind is neither 'x' nor '=', both if statements are false and the control comes to else.
+12. ts.putback() puts Token t back into Token_stream(). 
+13. full is still false (Step 3). So buffer (which is a Token type) is set to Token t and full is set to true.
+14. val's new value is set to expression(). So expression() is called.
+15. expression() calls term().
+16. term() calls primary().
+17. primary() calls ts.get(). 
+18. This time full is true. So full is set to false and buffer is returned.
+19. buffer's value is stored in Token t.
+20. t.kind is evaluated. In this case, it's '8'. So t.value is returned.
+21. double left in term() is initialized with t.value which is 2.
+22. In term(). A Token t is declared and ts.get() is called.
+23. This time full is false. A character ch is declared and cin is read into it.
+24. Because case '+' is matched, a Token ch with the value t ('+', 0) is returned.
+25. The default statement comes to action. ts.putback(t) is called. 
+26. buffer is set to t ('+' in this case) and full is true.
+27. left, whose value is 2, is returned.
+28. In expression(). A double left is initialized with 2. 
+29. ts.get() is called again. 
+30. full is true. So buffer, whose value is '+', returned and full is set to false.
+31. while is true.
+32. The switch statement jumps into action.
+33. case '+' is true.
+34. left (whose value is 2, step 28) is added to term(). 
+35. term() is called. 
+36. primary() is called.
+37. ts.get() is called of primary() is called. 
+38. A Token of value t('8', 3) is returned.
+39. Because t.kind is '8', t.value of 3 is returned by primary().
+40. left in term() is initialized with 3.
+41. ts.get() is called again. 
+42. full is false (step 30). So another Token t ('=', 0) is returned.
+43. t.kind is neither '*' nor '/'. ts.putback() is called.
+44. putback(t) is sets buffer to t('=', 0) and full to true.
+45. term() returns left, whose value is 3.
+46. In expression(). left is now 2 + 3.
+47. ts.get() is called again.
+48. if is true so the buffer (whose value is t('=', 0)) is returned and stored in t in expression(). 
+49. 
