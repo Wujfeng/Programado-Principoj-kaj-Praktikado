@@ -91,7 +91,7 @@ Token Token_stream::get()	// Error 2: get() couldn't access full. Made it a Toke
         {    
             cin.putback(ch);         // put digit back into the input stream
             double val;
-            cin >> val;              // read a floating-point number
+            cin >> val;              // read a floating-point number and stop as soon as a non-numeric character comes your way. 
             return Token('8',val);   // let '8' represent "a number"
         }
     default:
