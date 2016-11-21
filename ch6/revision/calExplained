@@ -1,5 +1,6 @@
-te 2 + 3 = 
+Evaluate 2 + 3 = 
 
+0. A double val is declared and initialized to 0.
 1. while (cin) // As long as there is input
 2. Token t = ts.get(); // Create a Token t and invoke the function ts.get()
 3. Inside ts.get(), if (full) is false because Token_stream() sets full to false and buffer to zero.
@@ -8,8 +9,8 @@ te 2 + 3 =
 6. cin.putback(ch) is called. It's a Standard Library function.
 7. putback() puts ch back into cin.
 8. cin is read into val. Reading into cin stops as soon as a non-numeric ch is encountered.
-9. A Token of type t ('8', val) is returend.
-10. That Token initialises Token t with the value ('8', 2).
+9. A Token of type t ('8', val) is returned.
+10. That Token initialises the Token t in main() with the value ('8', 2).
 11. Because t.kind is neither 'x' nor '=', both if statements are false and the control comes to else.
 12. ts.putback() puts Token t back into Token_stream(). 
 13. full is still false (Step 3). So buffer (which is a Token type) is set to Token t and full is set to true.
@@ -48,4 +49,8 @@ te 2 + 3 =
 46. In expression(). left is now 2 + 3.
 47. ts.get() is called again.
 48. if is true so the buffer (whose value is t('=', 0)) is returned and stored in t in expression(). 
-49. 
+49. cin is true(?). So ts.get() is called again.
+50. The first if (ch == '=') is true.
+51. val is printed. Hurrah.
+:wq
+ 
