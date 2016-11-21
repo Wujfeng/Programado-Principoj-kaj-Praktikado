@@ -1,0 +1,67 @@
+Evaluate (2 + 3) * 10 =
+
+1. Two statements explaining how to use the calculator are printed.
+2. A double VAL is declared and initialised to 0.
+3. CIN is TRUE because there is some content in the input stream.
+4. A TOKEN T is declared and initialised to TS.GET().
+5. Inside TS.GET().
+6.	FULL is FALSE.
+7.	A CHAR CH is declared. 
+8.	CH is read into CIN.
+9. 	CH is '(' so a TOKEN with the value ('(', 0) is returned.
+10. T.KIND is neither '=' nor 'x'.
+11. Control goes to ELSE which invokes TS.PUTBACK().  
+12. Inside TS.PUTBACK().
+13.	A TOKEN BUFFER acquires the value ('(', 0) stored in TOKEN T.
+14.	FULL is set to TRUE.
+15. VAL's new value is set to EXPRESSION().
+16. Inside EXPRESSION().
+17.	A DOUBLE LEFT is declared and calls TERM().
+18. 	Inside TERM().
+19.		A DOUBLE LEFT is declared and calls PRIMARY().
+20.		Inside PRIMARY().
+21.			A TOKEN T is declared and calls TS.GET().
+22.		 	Inside TS.GET().
+23.				FULL is TRUE.
+24.				BUFFER's value is ('(', 0).
+25.				BUFFER is returned and FULL is set to FALSE.
+26.			TOKEN T has the value ('(', 0).
+27.			T.KIND is '('.
+28.			A DOUBLE D is declared and initialised to EXPRESSION().
+29.			INSIDE EXPRESSION().
+30.				A DOUBLE LEFT is declared and calls TERM().
+31.				Inside TERM().
+32.					A DOUBLE LEFT is declared and initialised to PRIMARY().
+33.					Inside PRIMARY(). 
+34.				 		A TOKEN T is declared and initialised to TS.GET().
+35.						Inside TS.GET().
+36.							A CHAR CH is declared. 
+37.							CH is read into CIN.
+38.							CH is 2. 
+39.							CIN.PUTBACK(CH) is invoked.
+40.							A DOUBLE VAL is declared.
+41.							VAL is initialised to CH.
+42.							(The reading continues until a non-numeric character is encountered.)
+43.							(The non-numeric character in this case is +).
+44.							(As soon as + is met, a TOKEN is returned.)
+45.							A TOKEN with the value ('8', 2) is returned.
+46.						PRIMARY()'s TOKEN T is initialised with the value ('8', 2).
+47.						T.KIND is '8'.
+48.						T.VALUE is returned.
+49.					LEFT's value is 2.
+50.					A TOKEN T is declared and TS.GET() is called again.
+51.					Inside TS.GET().
+52.						FULL is FALSE. (Line 25).
+53.						A CHAR CH is declared.
+54.						CH is read into CIN.
+55.						CH is '+'.
+56.						A TOKEN with the value ('+', 0) is returned.
+57.					Because T.KIND is neither '*' nor '/', TS.PUTBACK is called.
+58.						TS.PUTBACK(T) stores T's value into BUFFER and set FULL to TRUE.
+49.					A DOUBLE LEFT is returned. LEFT's value is 2. (Line 49).
+50.				LEFT's value is 2.
+51.				TOKEN T gets its value from BUFFER and FULL is set to FALSE. 
+52.				T.KIND is '+'.
+53.				TS.GET() is called again.
+54.				Inside TS.GET().
+55.												
