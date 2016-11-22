@@ -202,12 +202,13 @@ try
 
     double val = 0;
     while (cin) {
+        cout << "> ";
         Token t = ts.get();
 
 //        double val = t.value;	  // Error 5: val was not defined. 
         if (t.kind == 'x') break; // 'x' for quit
         if (t.kind == '=')        // '=' for "print now"
-            cout << "=" << val << '\n';
+            cout << "Result: " << val << '\n';
         else 
             ts.putback(t);
 

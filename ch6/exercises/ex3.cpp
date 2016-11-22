@@ -1,76 +1,94 @@
-// ex3.cpp: Четан Ананд
-// Описание: Add a factorial operator !. Make it bind tighter than * and /.
-
+/*
+  Add factorial operator to this program.
+  Book: Programming Principles and Practice Using C++
+  Author: Bjarne Stroustrup
+  Student: Chetan Anand
+  Date: 2016-11-21
+*/
 
 #include "std_lib_facilities.h"
 
-class Token {	    // A token is defined.
+//------------------------------------------------------------------------------
+
+// Понял.
+
+class Token { // Error 1: "class" was written "lass."
 public:
-    char kind;       
-    double value;   
-    Token(char ch)  
-        :kind(ch), value(0) { }
-    Token(char ch, double val)     
+    char kind;        // what kind of token
+    double value;     // for numbers: a value 
+    Token(char ch)    // make a Token from a char
+        :kind(ch), value(0) { }    
+    Token(char ch, double val)     // make a Token from a char and a double
         :kind(ch), value(val) { }
 };
 
 //------------------------------------------------------------------------------
 
-class Token_stream {  
-public:
-    Token_stream();  
-    Token get();    
-    void putback(Token t);
+// 
+
+class Token_stream {
+public: 
+    Token_stream();   // make a Token_stream that reads from cin
+    Token get();      // get a Token (get() is defined elsewhere)
+    void putback(Token t);    // put a Token back
 private:
-    bool full;        
-    Token buffer;    
+    bool full;        // is there a Token in the buffer?
+    Token buffer;     // here is where we keep a Token put back using putback()
 };
 
 //------------------------------------------------------------------------------
 
-Token_stream::Token_stream()       // buffer is a Token. It takes either a char 
-    : full(false), buffer(0) { }   // as an argument or a char and a double. 
-                                   // Why is there a zero? 
+// Понял
+// Everytime Token_stream() is called, it sets the Boolean variable full to false
+// and it assigns t.kind == NUL and t.value == 0 to buffer.
 
-//------------------------------------------------------------------------------
-
-void Token_stream::putback(Token t)    
-{
-    if (full) error("putback() into a full buffer");
-    buffer = t;      
-    full = true;    
+// The constructor just sets full to indicate that the buffer is empty:
+Token_stream::Token_stream() 
+:full(false), buffer(0)    // no Token in buffer
+{ 
 }
 
 //------------------------------------------------------------------------------
 
-Token Token_stream::get()  // get() Token ਪੜ੍ਹਦਾ ਹੈ।
+// Понял
+// The putback() member function puts its argument back into the Token_stream's buffer:
+void Token_stream::putback(Token t)
 {
-    if (full) {            // ਜੇ buffer ਵਿਚ ਪਹਿਲਾਂ ਤੋਂ ਹੀ Token ਹੈ ਤਾਂ ਇਹ ਕੋਡ ਬਲਾਕ ਐਕਟੀਵੇਟ ਹੋ ਜਾਂਦਾ ਹੈ।
-        full=false;        // full ਨੂੰ false ਡਿਕਲੇਅਰ ਕਰਨ ਤੋਂ ਬਾਅਦ
-        return buffer;     // buffer ਨੂੰ ਰਿਟਰਨ ਕਰ ਦਿੱਤਾ ਜਾਂਦਾ ਹੈ।
-    }
+    if (full) error("putback() into a full buffer");
+    buffer = t;       // copy t to buffer
+    full = true;      // buffer is now full
+}
+
+//------------------------------------------------------------------------------
+
+// Find out how break and return are different.
+// How does cin.putback() stop reading numbers.
+//  
+
+Token Token_stream::get()	// Error 2: get() couldn't access full. Made it a Token_stream() function.
+{
+    if (full) {       // do we already have a Token ready?
+        // remove token from buffer
+        full=false;
+        return buffer;
+    } 
 
     char ch;
-    cin >> ch;    // ਸਪੇਸ, ਨਿਊਲਾਈਨ, ਟੈਬ ਵਗੈਰਾ ਨੂੰ ਇਗਨੋਰ ਕਰ ਦਿੱਤਾ ਜਾਂਦਾ ਹੈ।
+    cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
 
     switch (ch) {
-    case '=':    // ਪ੍ਰਿੰਟ ਕਰਨ ਲਈ।
-    case 'x':    // ਪ੍ਰੋਗ੍ਰਾਮ ਤੋਂ ਬਾਹਰ ਨਿਕਲਣ ਲਈ।
-    case '(': case ')': case '{': case '}': case '+': case '-': case '*': case '/':
-        return Token(ch);        // ਹਰ ਹਰਫ਼ (char) ਖੁਦ ਨੂੰ ਰੈਪ੍ਰਜ਼ੈਂਟ ਕਰਦਾ ਹੈ।
+    case 'x':    // for "print"
+    case '=':    // for "quit"
+    case '(': case ')': case '+': case '-': case '*': case '/': 
+        return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
-    case '5': case '6': case '7': case '8': case '9':
-    /*
-     *  ਇਹ ਕੋਡ ਬਲਾਕ ਇਸ ਪ੍ਰੋਗਰਾਮ ਦਾ ਸਭ ਤੋਂ ਮੁਸ਼ਕਲ ਹਿੱਸਾ ਹੈ।
-     *  ਕਿਤਾਬ ਦੇ ਲਿਖਾਰੀ ਬਯਾਰਨ ਸਟ੍ਰੋਸਟਰੁਪ ਦੇ ਮੁਤਾਬਕ ਅਜੇ ਇਹ ਯਕੀਨ ਕਰਨਾ ਪਵੇਗਾ ਕਿ ਇਹ
-     *    ਬਲਾਕ ਕੰਮ ਕਰਦਾ ਹੈ। ਡਿਟੇਲਸ ਲਈ ਅਜੇ ਥੋੜ੍ਹਾ ਚਿਰ ਇੰਤਜ਼ਾਰ ਕਰਨਾ ਪਵੇਗਾ।
-    */
-        {
-            cin.putback(ch);         // ਡਿਜਿਟ ਨੂੰ ਇਨਪੁਟ ਸਟ੍ਰੀਮ ਵਿਚ ਸੁੱਟਦਾ ਹੈ।
+    case '5': case '6': case '7': case '8': case '9': // Error 3: case '8': was missing.
+        {    
+            cin.putback(ch);         // put digit back into the input stream
             double val;
-            cin >> val;              // ਫਲੋਟਿੰਗ ਪੁਵਾਇੰਟ ਨੰਬਰ ਪੜ੍ਹਦਾ ਹੈ।
-            return Token('8',val);   // ਇਹ ਮੰਨ ਲੈਂਦੇ ਹਾਂ ਕਿ '8' ਨੰਬਰ ਰੈਪ੍ਰਜ਼ੈੰਟ ਕਰਦਾ ਹੈ।
+            cin >> val;              // read a floating-point number and stop as soon as a non-numeric character comes your way. 
+            return Token('8',val);   // let '8' represent "a number"
         }
     default:
         error("Bad token");
@@ -79,41 +97,28 @@ Token Token_stream::get()  // get() Token ਪੜ੍ਹਦਾ ਹੈ।
 
 //------------------------------------------------------------------------------
 
-Token_stream ts;        // get() ਅਤੇ putback() ts ਕਲਾਸ ਦਾ ਹਿੱਸਾ ਬਣਨਗੇ।
+Token_stream ts;        // provides get() and putback() 
 
 //------------------------------------------------------------------------------
 
-double expression();    // expression() ਨੂੰ ਇੱਥੇ ਡਿਕਲੇਅਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ ਤਾਂ ਕਿ primary()
-                        // ਇਸ ਫੰਕਸ਼ਨ ਨੂੰ ਕਾਲ ਕਰ ਸਕੇ।
+double expression();    // declaration so that primary() can call expression()
 
 //------------------------------------------------------------------------------
 
-double term();		// term() ਨੂੰ ਡਿਕਲੇਅਰ ਕਰਨ ਦਾ ਮਕਸਦ ਇਹ ਪੱਕਾ ਕਰਨਾ ਹੈ ਕਿ primary()
-                        // ਅਤੇ expression() ਇਸ ਨੂੰ ਕਾਲ ਕਰ ਸਕਣ।
-
-//------------------------------------------------------------------------------
-
-// ਨੰਬਰਾਂ, ਗੋਲ ਬਰੈਕਟਾਂ ਅਤੇ ਕਰਲੀ ਬਰੈਕਟਾਂ ਨੂੰ ਹੈਂਡਲ ਕਰਦਾ ਹੈ।
+// deal with numbers and parentheses
 double primary()
 {
     Token t = ts.get();
     switch (t.kind) {
-    case '{':
-        {
-            double i = expression();
-            t = ts.get();
-            if (t.kind != '}') error ("'}' expected");
-            return i;
-        }
-    case '(':
-        {
+    case '(':    // handle '(' expression ')'
+        {    
             double d = expression();
             t = ts.get();
             if (t.kind != ')') error("')' expected");
             return d;
         }
-    case '8':
-        return t.value;
+    case '8':            // we use '8' to represent a number
+        return t.value;  // return the number's value
     default:
         error("primary expected");
     }
@@ -121,28 +126,28 @@ double primary()
 
 //------------------------------------------------------------------------------
 
-// *, / ਅਤੇ % ਨੂੰ ਹੈਂਡਲ ਕਰਦਾ ਹੈ।
+// deal with *, /, and %
 double term()
 {
     double left = primary();
-    Token t = ts.get();        // Token_stream ਤੋਂ ਅਗਲਾ Token ਪੜ੍ਹੋ।
+    Token t = ts.get();        // get the next token from token stream
 
     while(true) {
         switch (t.kind) {
         case '*':
             left *= primary();
             t = ts.get();
-            break;
+	    break; 		// Devious 2: There was no break.
         case '/':
-            {
+            {    
                 double d = primary();
                 if (d == 0) error("divide by zero");
-                left /= d;
+                left /= d; 
                 t = ts.get();
                 break;
             }
         default: 
-            ts.putback(t);     // t ਨੂੰ ਮੁੜ Token_stream ਵਿਚ ਪਾਓ।
+            ts.putback(t);     // put t back into the token stream
             return left;
         }
     }
@@ -150,25 +155,25 @@ double term()
 
 //------------------------------------------------------------------------------
 
-// + ਅਤੇ - ਨੂੰ ਹੈਂਡਲ ਕਰਦਾ ਹੈ।
+// deal with + and -
 double expression()
 {
-    double left = term();      // term ਨੂੰ ਪੜ੍ਹਨਾ ਅਤੇ ਇਵੈਲਯੂਏਟ ਕਰਨਾ ਹੈ।
-    Token t = ts.get();        // Token_stream ਤੋਂ ਅਗਲਾ Token ਪੜ੍ਹੋ।
+    double left = term();      // read and evaluate a Term // Error 4 Term() was written Term( - the right parenthesis was missing.
+    Token t = ts.get();        // get the next token from token stream
 
-    while(true) {
+    while(true) {    
         switch(t.kind) {
         case '+':
-            left += term();    // Term ਨੂੰ ਇਵੈਲਯੂਏਟ ਕਰਕੇ left ਵਿਚ ਐਡ ਕਰੋ।
+            left += term();    // evaluate Term and add
             t = ts.get();
             break;
         case '-':
-            left -= term();
+            left -= term();    // evaluate Term and subtract // Devious 1: left += term
             t = ts.get();
             break;
-        default:
-            ts.putback(t);     // t ਨੂੰ ਮੁੜ Token_stream ਵਿਚ ਪਾਓ।
-            return left;       // ਜਦੋਂ + ਜਾਂ - ਮਿਲਣੇ ਬੰਦ ਹੋ ਜਾਣ ਤਾ left ਨੂੰ ਰਿਟਰਨ ਕਰ ਦੇਵੋ।
+        default: 
+            ts.putback(t);     // put t back into the token stream
+            return left;       // finally: no more + or -: return the answer
         }
     }
 }
@@ -178,37 +183,31 @@ double expression()
 int main()
 try
 {
+    cout << "This is a calculator." << endl;
+    cout << "Print x to quit and = to see results." << endl;
 
-    cout << "ਇਹ ਇੱਕ ਕੈਲਕਯੂਲੇਟਰ ਹੈ ਜੋ +, -, * ਅਤੇ / ਕਰਦਾ ਹੈ। " << endl;
-    cout << "ਕਰਲੀ ({}) ਅਤੇ ਬਰੈਕਟਾਂ (()) ਨੂੰ ਸਮਝਦਾ ਹੈ। " << endl;
-    cout << "ਆਪਣੀ ਇਕਸਪ੍ਰੈਸ਼ਨ ਲਿਖੋ ਅਤੇ = ਦਬਾਓ। " << endl;
-    cout << "ਸਿੰਪਲ ਇਕਸਪ੍ਰੈਸ਼ਨ ਇੰਝ ਦੀ ਦਿਖਦੀ ਹੈ: 2+3" << endl;
-    cout << "ਮੁਸ਼ਕਲ ਇਕਸਪ੍ਰੈਸ਼ਨ ਦਾ ਰੂਪ ਕੁਝ ਅਜਿਹਾ ਹੋ ਸਕਦਾ ਹੈ: 2+(100-2)*3/4" << endl;
-    cout << endl;
-    cout << endl;
-    double val = 0;		  // val ਨੂੰ ਡਿਕਲੇਅਰ ਅਤੇ ਇਨੀਸ਼ੀਅਲਾਈਜ਼ ਕੀਤਾ।
+    double val = 0;
     while (cin) {
-        cout << "> "; 
         Token t = ts.get();
 
-        if (t.kind == 'x') break; // 'x' ਪ੍ਰੋਗਰਾਮ ਵਿਚੋਂ ਬਾਹਰ ਨਿਕਲਣ ਲਈ।
-        if (t.kind == '=') {        // '=' ਆਨਸਲ ਪ੍ਰਿੰਟ ਕਰਨ ਲਈ।
-            cout << val << '\n';
-        }
-        else {
+//        double val = t.value;	  // Error 5: val was not defined. 
+        if (t.kind == 'x') break; // 'x' for quit
+        if (t.kind == '=')        // '=' for "print now"
+            cout << "=" << val << '\n';
+        else 
             ts.putback(t);
-        }
+
         val = expression();
     }
 }
-
 catch (exception& e) {
-    cerr << "error: " << e.what() << '\n';
+    cerr << "error: " << e.what() << '\n'; 
     return 1;
 }
-
 catch (...) {
-    cerr << "Oops: unknown exception!\n";
+    cerr << "Oops: unknown exception!\n"; 
     return 2;
 }
+
+//-----------------------------------------------------------------------------
 

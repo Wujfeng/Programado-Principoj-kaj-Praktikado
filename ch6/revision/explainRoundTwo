@@ -2,7 +2,7 @@ Evaluate (2 + 3) * 10 =
 
 1. Two statements explaining how to use the calculator are printed.
 2. A double VAL is declared and initialised to 0.
-3. CIN is TRUE because there is some content in the input stream.
+3. WHILE is TRUE because there is some content in the input stream.
 4. A TOKEN T is declared and initialised to TS.GET().
 5. Inside TS.GET().
 6.	FULL is FALSE.
@@ -64,4 +64,4 @@ Evaluate (2 + 3) * 10 =
 52.				T.KIND is '+'.
 53.				TS.GET() is called again.
 54.				Inside TS.GET().
-55.												
+55.	// IGNORE. INCOMPLETE. SORRY. 											
