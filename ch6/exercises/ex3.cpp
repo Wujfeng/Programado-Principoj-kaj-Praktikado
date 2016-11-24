@@ -3,7 +3,7 @@
   Book: Programming Principles and Practice Using C++
   Author: Bjarne Stroustrup
   Student: Chetan Anand
-  Date: 2016-11-21
+  Date: 2016-11-21 (2016-11-23)
 */
 
 #include "std_lib_facilities.h"
@@ -79,7 +79,7 @@ Token Token_stream::get()	// Error 2: get() couldn't access full. Made it a Toke
     switch (ch) {
     case 'x':    // for "print"
     case '=':    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/': 
+    case '(': case ')': case '+': case '-': case '*': case '/': case '!': 
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -101,6 +101,18 @@ Token_stream ts;        // provides get() and putback()
 
 //------------------------------------------------------------------------------
 
+double factorial (double n) {
+  int result = n;	// The function works on ints. Double values are converted.
+  int count = 1;
+  int * ptrCount = &count;
+  for (int i = 1; i <= result; ++i) {
+    *ptrCount *= i;
+  }
+  double f = count;
+  return f;
+} 
+
+//------------------------------------------------------------------------------
 double expression();    // declaration so that primary() can call expression()
 
 //------------------------------------------------------------------------------
@@ -117,6 +129,11 @@ double primary()
             if (t.kind != ')') error("')' expected");
             return d;
         }
+    case '!':
+      {
+        double d = factorial (.value);
+	return d;
+      }
     case '8':            // we use '8' to represent a number
         return t.value;  // return the number's value
     default:
@@ -185,7 +202,7 @@ try
 {
     cout << "This is a calculator." << endl;
     cout << "Print x to quit and = to see results." << endl;
-
+    
     double val = 0;
     while (cin) {
         Token t = ts.get();
