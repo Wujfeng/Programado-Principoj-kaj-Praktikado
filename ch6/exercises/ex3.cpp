@@ -103,16 +103,17 @@ Token_stream ts;        // provides get() and putback()
 
 double factorial (double n) {
   int result = n;	// The function works on ints. Double values are converted.
-  int count = 1;
+  int count = 1;        
   int * ptrCount = &count;
   for (int i = 1; i <= result; ++i) {
     *ptrCount *= i;
   }
-  double f = count;
+  double f = count;    // f is a randomly chosen name. 
   return f;
 } 
 
 //------------------------------------------------------------------------------
+
 double expression();    // declaration so that primary() can call expression()
 
 //------------------------------------------------------------------------------
@@ -129,11 +130,7 @@ double primary()
             if (t.kind != ')') error("')' expected");
             return d;
         }
-    case '!':
-      {
-        double d = factorial (.value);
-	return d;
-      }
+
     case '8':            // we use '8' to represent a number
         return t.value;  // return the number's value
     default:
@@ -206,8 +203,6 @@ try
     double val = 0;
     while (cin) {
         Token t = ts.get();
-
-//        double val = t.value;	  // Error 5: val was not defined. 
         if (t.kind == 'x') break; // 'x' for quit
         if (t.kind == '=')        // '=' for "print now"
             cout << "=" << val << '\n';
@@ -225,6 +220,14 @@ catch (...) {
     cerr << "Oops: unknown exception!\n"; 
     return 2;
 }
+
+/*
+   For 3!.
+   1. ts.get() gets 3.
+   2. The second if-loop stores t.get()'s value into buffer.
+   3. 
+
+*/
 
 //-----------------------------------------------------------------------------
 
