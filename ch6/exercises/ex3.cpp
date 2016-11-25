@@ -3,7 +3,8 @@
   Book: Programming Principles and Practice Using C++
   Author: Bjarne Stroustrup
   Student: Chetan Anand
-  Date: 2016-11-21 (2016-11-23)
+  Date: 2016-11-21 (2016-11-23) 
+  Solved on: 2016-11-24
 */
 
 #include "std_lib_facilities.h"
@@ -102,10 +103,10 @@ Token_stream ts;        // provides get() and putback()
 //------------------------------------------------------------------------------
 
 double factorial (double n) {
-  int result = n;	// The function works on ints. Double values are converted.
-  int count = 1;        
-  int * ptrCount = &count;
-  for (int i = 1; i <= result; ++i) {
+  long int result = n;	// The function works on ints. Double values are converted.
+  long int count = 1;        
+  long int * ptrCount = &count;
+  for (long int i = 1; i <= result; ++i) {
     *ptrCount *= i;
   }
   double f = count;    // f is a randomly chosen name. 
@@ -116,6 +117,9 @@ double factorial (double n) {
 
 double expression();    // declaration so that primary() can call expression()
 
+//------------------------------------------------------------------------------
+
+double faktorial();     // declaration so that faktorial() can call primary
 //------------------------------------------------------------------------------
 
 // deal with numbers and parentheses
@@ -130,7 +134,7 @@ double primary()
             if (t.kind != ')') error("')' expected");
             return d;
         }
-
+     
     case '8':            // we use '8' to represent a number
         return t.value;  // return the number's value
     default:
@@ -140,21 +144,35 @@ double primary()
 
 //------------------------------------------------------------------------------
 
+double faktorial()      // Deals with !, a higher level operator than *, /, and % 
+{
+    double left = primary();
+    Token t = ts.get();
+    if (t.kind == '!') {
+        left = factorial(left);  
+        return left;
+    }
+    ts.putback(t);
+    return left;
+}
+
+//------------------------------------------------------------------------------
+
 // deal with *, /, and %
 double term()
 {
-    double left = primary();
+    double left = faktorial();
     Token t = ts.get();        // get the next token from token stream
 
     while(true) {
         switch (t.kind) {
         case '*':
-            left *= primary();
+            left *= faktorial();
             t = ts.get();
 	    break; 		// Devious 2: There was no break.
         case '/':
             {    
-                double d = primary();
+                double d = faktorial();
                 if (d == 0) error("divide by zero");
                 left /= d; 
                 t = ts.get();
