@@ -16,28 +16,32 @@ public:
 };
 
 int main() 
-try { 
-    vector <Name_value> nvVector;
-    for (int i = 0; i < 10; ++i) {
-        double d = 0.0;
-        d += i;
-        nvElement ("Chetan", d);
-        nvVector.push_back (nvElement); 
-    }
+try {
+    vector <Name_value> nameValues;
 
-    for (int i = 0; i < nvVector.size(); ++i) 
-        cout << nvElement.name << " " << nvElement.score << endl;
+    string n;
+    double d;
+    cout << "Enter a name followed by the person's score: ";
 
+    while (cin >> n >> d) {
+        for (int i = 0; i < nameValues.size(); ++i)
+            if (nameValues[i].name == n) error ("Can't enter the same name twice.");
+        nameValues.push_back (Name_value (n, d));  
+    } 
+    
+    for (int i = 0; i < nameValues.size(); ++i) 
+        cout << nameValues[i].name << '\t' << nameValues[i].score << endl;
+   
     return 0;
 }
 
 catch (exception &e) {
     cerr << "error: " << e.what() << '\n';
-    return -1;
+    return 1;
 }
 
 catch (...) {
     cerr << "Oops! Something unexpected happened somewhere." << '\n';
-    return -2;
+    return 2;
 }
  
